@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{PROJECT_TITLE}} - Kelly Peng</title>
+    <style>
+        :root {
+            /* Apple Design System Variables */
+            --apple-blue: #87CEEB;
+            --apple-gray: #8E8E93;
+            --apple-gray-light: #F2F2F7;
+            --apple-radius-small: 6px;
+            --apple-radius-medium: 8px;
+            --apple-radius-large: 12px;
+            --apple-radius-xlarge: 24px;
+            --apple-spacing-xs: 4px;
+            --apple-spacing-s: 8px;
+            --apple-spacing-m: 16px;
+            --apple-spacing-l: 24px;
+            --apple-spacing-xl: 32px;
+            --apple-spacing-huge: 48px;
+            --apple-separator: #D1D1D6;
+            
+            /* Apple Typography */
+            --apple-font-large-title: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            --apple-font-title-1: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            --apple-font-title-2: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            --apple-font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            --apple-font-caption: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+        }
+
+        /* Light mode styles (default) */
+        body.light-mode,
+        body:not(.dark-mode) {
+            --apple-background: #FFFFFF;
+            --apple-background-secondary: #FFFFFF;
+            --apple-text-primary: #1D1D1F;
+            --apple-text-secondary: #86868B;
+            --apple-text-tertiary: #86868B99;
+            --apple-separator: #D1D1D6;
+            --apple-gray-light: #F2F2F7;
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            --apple-background: #000000;
+            --apple-background-secondary: #1C1C1E;
+            --apple-text-primary: #F2F2F7;
+            --apple-text-secondary: #8E8E93;
+            --apple-text-tertiary: #8E8E9399;
+            --apple-separator: #38383A;
+            --apple-gray-light: #2C2C2E;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--apple-font-body);
+            background-color: var(--apple-background);
+            color: var(--apple-text-primary);
+            line-height: 1.47059;
+            letter-spacing: -0.022em;
+        }
+
+        /* Header Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--apple-background);
+            backdrop-filter: blur(20px);
+            border-bottom: 0.5px solid var(--apple-separator);
+            z-index: 1000;
+            padding: var(--apple-spacing-m) var(--apple-spacing-xl);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            color: var(--apple-blue);
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: var(--apple-spacing-xs);
+        }
+
+        .back-link:hover {
+            opacity: 0.7;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: relative;
+            background: var(--apple-background);
+            border: 0.5px solid var(--apple-separator);
+            border-radius: var(--apple-radius-xlarge);
+            padding: var(--apple-spacing-xs);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 28px;
+            background: var(--apple-gray);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .toggle-switch.dark {
+            background: var(--apple-blue);
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .toggle-switch.light .toggle-slider {
+            transform: translateX(22px);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            padding: var(--apple-spacing-xl);
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .project-header {
+            margin-bottom: var(--apple-spacing-huge);
+            text-align: center;
+        }
+
+        .project-title {
+            font-size: 48px;
+            font-weight: 600;
+            font-family: var(--apple-font-large-title);
+            color: var(--apple-text-primary);
+            margin-bottom: var(--apple-spacing-m);
+            letter-spacing: -0.005em;
+        }
+
+        .project-subtitle {
+            font-size: 19px;
+            color: var(--apple-text-secondary);
+            margin-bottom: var(--apple-spacing-l);
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: center;
+            gap: var(--apple-spacing-xl);
+            margin-bottom: var(--apple-spacing-xl);
+        }
+
+        .meta-item {
+            text-align: center;
+        }
+
+        .meta-label {
+            font-size: 13px;
+            color: var(--apple-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--apple-spacing-xs);
+        }
+
+        .meta-value {
+            font-size: 17px;
+            color: var(--apple-text-primary);
+            font-weight: 500;
+        }
+
+        .project-tags {
+            display: flex;
+            justify-content: center;
+            gap: var(--apple-spacing-s);
+            margin-bottom: var(--apple-spacing-huge);
+        }
+
+        .tag {
+            background: var(--apple-gray-light);
+            color: var(--apple-text-secondary);
+            padding: var(--apple-spacing-xs) var(--apple-spacing-m);
+            border-radius: var(--apple-radius-xlarge);
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* Hero Image Section */
+        .hero-image {
+            margin-bottom: var(--apple-spacing-huge);
+            border-radius: var(--apple-radius-large);
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Content Sections */
+        .content-section {
+            margin-bottom: var(--apple-spacing-huge);
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 600;
+            font-family: var(--apple-font-title-1);
+            color: var(--apple-text-primary);
+            margin-bottom: var(--apple-spacing-l);
+            letter-spacing: -0.003em;
+        }
+
+        .section-content {
+            font-size: 19px;
+            line-height: 1.47059;
+            color: var(--apple-text-primary);
+            max-width: 800px;
+        }
+
+        .section-content p {
+            margin-bottom: var(--apple-spacing-l);
+        }
+
+        /* Image Gallery */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--apple-spacing-l);
+            margin-bottom: var(--apple-spacing-huge);
+        }
+
+        .gallery-item {
+            border-radius: var(--apple-radius-medium);
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* CMS Content Areas */
+        .cms-content {
+            /* Dynamic content will be inserted here */
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: var(--apple-spacing-l);
+            }
+
+            .project-title {
+                font-size: 32px;
+            }
+
+            .project-meta {
+                flex-direction: column;
+                gap: var(--apple-spacing-l);
+            }
+
+            .project-tags {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <header class="header">
+        <nav class="nav-container">
+            <a href="kelly_portfolio.html" class="back-link">
+                ← Back to Home
+            </a>
+            
+            <div class="theme-toggle" onclick="toggleDarkMode()">
+                <div class="toggle-switch">
+                    <div class="toggle-slider">
+                        <span class="toggle-icon">☀️</span>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="project-header">
+            <h1 class="project-title">{{PROJECT_TITLE}}</h1>
+            <p class="project-subtitle">{{PROJECT_SUBTITLE}}</p>
+            
+            <div class="project-meta">
+                <div class="meta-item">
+                    <div class="meta-label">Year</div>
+                    <div class="meta-value">{{PROJECT_YEAR}}</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Category</div>
+                    <div class="meta-value">{{PROJECT_CATEGORY}}</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Role</div>
+                    <div class="meta-value">{{PROJECT_ROLE}}</div>
+                </div>
+            </div>
+
+            <div class="project-tags">
+                {{PROJECT_TAGS}}
+            </div>
+        </div>
+
+        <!-- Hero Image -->
+        <div class="hero-image">
+            <img src="{{HERO_IMAGE}}" alt="{{PROJECT_TITLE}} Hero Image">
+        </div>
+
+        <!-- Project Overview -->
+        <section class="content-section">
+            <h2 class="section-title">Project Overview</h2>
+            <div class="section-content">
+                <p>{{PROJECT_DESCRIPTION}}</p>
+                {{PROJECT_OVERVIEW_CONTENT}}
+            </div>
+        </section>
+
+        <!-- Design Process -->
+        <section class="content-section">
+            <h2 class="section-title">Design Process</h2>
+            <div class="section-content">
+                {{DESIGN_PROCESS_CONTENT}}
+            </div>
+        </section>
+
+        <!-- Image Gallery -->
+        <section class="content-section">
+            <h2 class="section-title">Project Gallery</h2>
+            <div class="image-gallery">
+                {{PROJECT_GALLERY}}
+            </div>
+        </section>
+
+        <!-- Key Features -->
+        <section class="content-section">
+            <h2 class="section-title">Key Features</h2>
+            <div class="section-content">
+                {{KEY_FEATURES_CONTENT}}
+            </div>
+        </section>
+
+        <!-- Results & Impact -->
+        <section class="content-section">
+            <h2 class="section-title">Results & Impact</h2>
+            <div class="section-content">
+                {{RESULTS_CONTENT}}
+            </div>
+        </section>
+
+        <!-- CMS Content Area -->
+        <div class="cms-content">
+            {{CMS_DYNAMIC_CONTENT}}
+        </div>
+    </main>
+
+    <!-- Dark Mode Toggle Script -->
+    <script>
+        // Dark mode toggle functionality
+        function toggleDarkMode() {
+            const body = document.body;
+            const toggleSwitch = document.querySelector('.toggle-switch');
+            const toggleIcon = document.querySelector('.toggle-icon');
+            
+            if (body.classList.contains('dark-mode')) {
+                // Switch to light mode
+                body.classList.remove('dark-mode');
+                body.classList.add('light-mode');
+                toggleSwitch.classList.remove('dark');
+                toggleIcon.textContent = '☀️';
+                localStorage.setItem('themeMode', 'light');
+            } else {
+                // Switch to dark mode
+                body.classList.remove('light-mode');
+                body.classList.add('dark-mode');
+                toggleSwitch.classList.add('dark');
+                toggleIcon.textContent = '🌙';
+                localStorage.setItem('themeMode', 'dark');
+            }
+        }
+
+        // Load saved theme preference
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('themeMode');
+            const body = document.body;
+            const toggleSwitch = document.querySelector('.toggle-switch');
+            const toggleIcon = document.querySelector('.toggle-icon');
+            
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+                body.classList.remove('light-mode');
+                toggleSwitch.classList.add('dark');
+                toggleIcon.textContent = '🌙';
+            } else {
+                body.classList.add('light-mode');
+                body.classList.remove('dark-mode');
+                toggleSwitch.classList.remove('dark');
+                toggleIcon.textContent = '☀️';
+            }
+        });
+    </script>
+</body>
+</html> 

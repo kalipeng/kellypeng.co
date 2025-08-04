@@ -1,0 +1,1994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weill Cornell Medicine - Kelly Peng</title>
+    <!-- Google Fonts for handwritten style -->
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Apple Design System Colors */
+            --apple-blue: #87CEEB;
+            --apple-blue-dark: #0A84FF;
+            --apple-gray: #8E8E93;
+            --apple-gray-2: #AEAEB2;
+            --apple-gray-3: #C7C7CC;
+            --apple-gray-4: #D1D1D6;
+            --apple-gray-5: #E5E5EA;
+            --apple-gray-6: #F2F2F7;
+            
+            /* Apple Typography System - Complete set matching main page */
+            --apple-font-large-title: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            --apple-font-title-1: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            --apple-font-title-2: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            --apple-font-title-3: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            --apple-font-headline: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            --apple-font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            --apple-font-callout: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            --apple-font-subheadline: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            --apple-font-footnote: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            --apple-font-caption-1: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            --apple-font-caption-2: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            
+            /* Apple Spacing - Based on 8px grid system */
+            --apple-spacing-xs: 4px;
+            --apple-spacing-s: 8px;
+            --apple-spacing-m: 16px;
+            --apple-spacing-l: 24px;
+            --apple-spacing-xl: 32px;
+            --apple-spacing-xxl: 48px;
+            --apple-spacing-xxxl: 64px;
+            --apple-spacing-huge: 96px;
+            
+            /* Apple Border Radius */
+            --apple-radius-small: 6px;
+            --apple-radius-medium: 12px;
+            --apple-radius-large: 16px;
+            --apple-radius-xlarge: 20px;
+        }
+
+        /* Light mode styles (default) */
+        body.light-mode,
+        body:not(.dark-mode) {
+            --apple-background: #FFFFFF;
+            --apple-background-secondary: #FFFFFF;
+            --apple-text-primary: #1D1D1F;
+            --apple-text-secondary: #86868B;
+            --apple-text-tertiary: #86868B99;
+            --apple-separator: #D1D1D6;
+            --apple-gray-light: #F2F2F7;
+        }
+
+        /* Dark mode styles (default) */
+        body {
+            --apple-background: #000000;
+            --apple-background-secondary: #1C1C1E;
+            --apple-text-primary: #F2F2F7;
+            --apple-text-secondary: #8E8E93;
+            --apple-text-tertiary: #8E8E9399;
+            --apple-separator: #38383A;
+            --apple-gray-light: #2C2C2E;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--apple-font-body);
+            background-color: var(--apple-background);
+            color: var(--apple-text-primary);
+            line-height: 1.47059;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: "kern" 1;
+            text-rendering: optimizeLegibility;
+        }
+
+        /* Header Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--apple-background);
+            backdrop-filter: blur(20px);
+            border-bottom: 0.5px solid var(--apple-separator);
+            z-index: 1000;
+            padding: var(--apple-spacing-m) var(--apple-spacing-xl);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            color: var(--apple-blue);
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: var(--apple-spacing-xs);
+        }
+
+        .back-link:hover {
+            opacity: 0.7;
+        }
+
+
+
+        /* Container Layout */
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Dark Mode Toggle Switch - Exactly like main page */
+        .theme-toggle {
+            position: fixed;
+            top: var(--apple-spacing-l);
+            left: var(--apple-spacing-l);
+            z-index: 2000;
+            background: var(--apple-background);
+            border: 0.5px solid var(--apple-separator);
+            border-radius: var(--apple-radius-xlarge);
+            padding: var(--apple-spacing-xs);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(20px);
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 28px;
+            background: var(--apple-gray);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .toggle-switch.dark {
+            background: var(--apple-blue);
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+
+
+        /* Left Sidebar - Apple Style - EXACTLY like main page */
+        .sidebar {
+            width: 250px;
+            background-color: var(--apple-background);
+            padding: var(--apple-spacing-huge) var(--apple-spacing-l) var(--apple-spacing-l) var(--apple-spacing-xl);
+            border-right: 0.5px solid var(--apple-separator);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        /* Simple Back Icon in Sidebar */
+        .sidebar-back {
+            margin-bottom: var(--apple-spacing-l);
+            padding-bottom: var(--apple-spacing-l);
+            border-bottom: 0.5px solid var(--apple-separator);
+        }
+
+        .sidebar-back a {
+            display: flex;
+            align-items: center;
+            gap: var(--apple-spacing-s);
+            color: var(--apple-blue);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 400;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar-back a:hover {
+            opacity: 0.7;
+        }
+
+        .back-icon {
+            font-size: 16px;
+        }
+
+        /* Section Navigation - Transparent, Text Only with Smart Visibility */
+        .section-nav {
+            position: fixed;
+            right: var(--apple-spacing-l);
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1998;
+            width: 180px;
+            max-height: 400px;
+            overflow-y: auto;
+            opacity: 1;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            visibility: visible;
+        }
+
+        .section-nav.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .section-nav h4 {
+            font-size: 13px;
+            color: var(--apple-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--apple-spacing-m);
+            font-weight: 500;
+            text-align: left;
+        }
+
+        .section-nav ul {
+            list-style: none;
+        }
+
+        .section-nav li {
+            margin-bottom: var(--apple-spacing-xs);
+        }
+
+        .section-nav a {
+            text-decoration: none;
+            color: var(--apple-text-secondary);
+            font-size: 14px;
+            display: block;
+            padding: var(--apple-spacing-xs) 0;
+            transition: color 0.3s ease;
+            font-family: var(--apple-font-body);
+            letter-spacing: -0.016em;
+            position: relative;
+        }
+
+        .section-nav a:hover {
+            color: var(--apple-text-primary);
+        }
+
+        .section-nav a.active {
+            color: var(--apple-blue);
+            font-weight: 500;
+        }
+
+        .section-nav a.active::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 2px;
+            height: 16px;
+            background: var(--apple-blue);
+            border-radius: 1px;
+        }
+
+        /* Hide section nav on mobile */
+        @media (max-width: 1024px) {
+            .section-nav {
+                display: none;
+            }
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-menu li {
+            margin-bottom: var(--apple-spacing-xs);
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--apple-text-primary);
+            font-size: 17px;
+            font-weight: 400;
+            display: block;
+            padding: var(--apple-spacing-s) 0;
+            transition: color 0.3s ease;
+            font-family: var(--apple-font-body);
+            letter-spacing: -0.022em;
+        }
+
+        .nav-menu a:hover {
+            color: var(--apple-blue);
+        }
+
+        .nav-menu a.active {
+            color: var(--apple-blue);
+            font-weight: 500;
+        }
+
+        /* Project List in Sidebar - EXACTLY like main page */
+        .project-list {
+            margin-top: var(--apple-spacing-xl);
+            padding-top: var(--apple-spacing-l);
+            border-top: 0.5px solid var(--apple-separator);
+        }
+
+        .project-list ul {
+            list-style: none;
+        }
+
+        .project-list li {
+            margin-bottom: var(--apple-spacing-xs);
+        }
+
+        .project-list a {
+            text-decoration: none;
+            color: var(--apple-text-secondary);
+            font-size: 15px;
+            display: block;
+            padding: var(--apple-spacing-xs) 0;
+            transition: color 0.3s ease;
+            font-family: var(--apple-font-body);
+            letter-spacing: -0.016em;
+        }
+
+        .project-list a:hover {
+            color: var(--apple-text-primary);
+        }
+
+        .project-list a.active {
+            color: var(--apple-blue);
+            font-weight: 500;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            padding: 0;
+            max-width: calc(100% - 250px);
+            width: 100%;
+        }
+
+        /* Content with padding (everything except hero) */
+        .main-content > *:not(.hero-image) {
+            padding-left: var(--apple-spacing-xl);
+            padding-right: var(--apple-spacing-xl);
+        }
+
+        .main-content {
+            padding-bottom: var(--apple-spacing-xl);
+        }
+
+        /* Hero Image at Top - True Full Width */
+        .hero-image {
+            margin: 0;
+            margin-bottom: var(--apple-spacing-xl);
+            overflow: hidden;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Scroll Down Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: var(--apple-spacing-xl);
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            z-index: 10;
+            animation: scrollBounce 2s infinite;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        .scroll-arrow {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: var(--apple-spacing-xs);
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .scroll-text {
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+            font-family: var(--apple-font-subheadline);
+        }
+
+        @keyframes scrollBounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-8px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-4px);
+            }
+        }
+
+        .scroll-indicator:hover {
+            opacity: 0.7;
+        }
+
+        /* Hide scroll indicator after scrolling */
+        .scroll-indicator.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Four Column Meta Information (Screenshot Style) */
+        .project-meta-below {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--apple-spacing-xl);
+            margin-bottom: var(--apple-spacing-huge);
+            padding: var(--apple-spacing-xl) 0;
+            border-bottom: 0.5px solid var(--apple-separator);
+        }
+
+        .meta-column h3 {
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--apple-text-primary);
+            margin-bottom: var(--apple-spacing-s);
+            font-family: var(--apple-font-headline);
+        }
+
+        .meta-column p {
+            font-size: 15px;
+            color: var(--apple-text-primary);
+            margin: 0;
+            line-height: 1.47059;
+            font-weight: 400;
+        }
+
+        @media (max-width: 1024px) {
+            .project-meta-below {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--apple-spacing-l);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .project-meta-below {
+                grid-template-columns: 1fr;
+                gap: var(--apple-spacing-l);
+            }
+        }
+
+        .project-header {
+            margin-bottom: var(--apple-spacing-huge);
+            text-align: center;
+        }
+
+        .project-title {
+            font-size: 48px;
+            font-weight: 600;
+            font-family: var(--apple-font-large-title);
+            color: var(--apple-text-primary);
+            margin-bottom: var(--apple-spacing-m);
+            letter-spacing: -0.005em;
+        }
+
+        .project-subtitle {
+            font-size: 19px;
+            color: var(--apple-text-secondary);
+            margin-bottom: var(--apple-spacing-l);
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: center;
+            gap: var(--apple-spacing-xl);
+            margin-bottom: var(--apple-spacing-xl);
+        }
+
+        .meta-item {
+            text-align: center;
+        }
+
+        .meta-label {
+            font-size: 13px;
+            color: var(--apple-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--apple-spacing-xs);
+        }
+
+        .meta-value {
+            font-size: 17px;
+            color: var(--apple-text-primary);
+            font-weight: 500;
+        }
+
+        .project-tags {
+            display: flex;
+            justify-content: center;
+            gap: var(--apple-spacing-s);
+            margin-bottom: var(--apple-spacing-huge);
+        }
+
+        .tag {
+            background: var(--apple-gray-light);
+            color: var(--apple-text-secondary);
+            padding: var(--apple-spacing-xs) var(--apple-spacing-m);
+            border-radius: var(--apple-radius-xlarge);
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* Hero Section for Medical Interface */
+        .hero-medical {
+            margin-bottom: var(--apple-spacing-huge);
+            padding: var(--apple-spacing-huge);
+            background: linear-gradient(135deg, #b8f2e6 0%, #aed9da 100%);
+            border-radius: var(--apple-radius-large);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+        }
+
+        .medical-interface {
+            background: white;
+            padding: var(--apple-spacing-xl);
+            border-radius: var(--apple-radius-medium);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .amount-display {
+            font-size: 36px;
+            font-weight: 600;
+            color: var(--apple-text-primary);
+            margin-bottom: var(--apple-spacing-l);
+            font-family: var(--apple-font-large-title);
+        }
+
+        /* Two Column Layout */
+        .two-column-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--apple-spacing-huge);
+            margin-bottom: var(--apple-spacing-huge);
+            width: 100%;
+        }
+
+        .two-column-section .content-section {
+            margin-bottom: 0;
+        }
+
+        .two-column-section .section-title {
+            font-size: 28px;
+            margin-bottom: var(--apple-spacing-l);
+        }
+
+        .two-column-section .section-content {
+            font-size: 15px;
+        }
+
+        .two-column-section .section-content h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--apple-text-primary);
+            margin-bottom: var(--apple-spacing-s);
+        }
+
+        /* Responsive: Single column on mobile */
+        @media (max-width: 768px) {
+            .two-column-section {
+                grid-template-columns: 1fr;
+                gap: var(--apple-spacing-xl);
+            }
+        }
+
+        /* Content Sections - Apple standard readable typography */
+        .content-section {
+            margin-bottom: var(--apple-spacing-huge);
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 600;
+            font-family: var(--apple-font-title-1);
+            color: var(--apple-text-primary);
+            margin-bottom: var(--apple-spacing-l);
+            letter-spacing: -0.02em;
+        }
+
+        .section-content {
+            font-size: 17px;
+            line-height: 1.47059;
+            color: var(--apple-text-secondary);
+            max-width: 800px;
+            font-family: var(--apple-font-body);
+            font-weight: 400;
+            letter-spacing: -0.022em;
+        }
+
+        .section-content p {
+            margin-bottom: var(--apple-spacing-m);
+        }
+
+        .highlighted-finding {
+            font-size: 18px;
+            font-weight: 300;
+            color: var(--apple-text-primary);
+            line-height: 1.4;
+            margin-top: var(--apple-spacing-l);
+            margin-bottom: var(--apple-spacing-l);
+            font-family: 'Kalam', 'Caveat', 'Dancing Script', cursive, var(--apple-font-title-1);
+            letter-spacing: 0.02em;
+            text-align: left;
+            transform: rotate(-2deg);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: relative;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: var(--apple-spacing-m);
+            border-radius: var(--apple-radius-medium);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .highlighted-finding::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -15px;
+            width: 30px;
+            height: 30px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20,80 Q40,60 60,80 Q80,60 100,80" stroke="%23FFD700" stroke-width="3" fill="none" opacity="0.6"/></svg>') no-repeat;
+            opacity: 0.3;
+            transform: rotate(15deg);
+        }
+
+        /* Random rotation variations for handwritten text */
+        .highlighted-finding:nth-child(1) { transform: rotate(-1deg); }
+        .highlighted-finding:nth-child(2) { transform: rotate(1.5deg); }
+        .highlighted-finding:nth-child(3) { transform: rotate(-0.8deg); }
+        .highlighted-finding:nth-child(4) { transform: rotate(2deg); }
+        .highlighted-finding:nth-child(5) { transform: rotate(-1.2deg); }
+
+        .section-content h3 {
+            font-size: 19px;
+            font-weight: 600;
+            color: var(--apple-text-primary);
+            margin-bottom: var(--apple-spacing-s);
+            font-family: var(--apple-font-headline);
+            letter-spacing: -0.016em;
+        }
+
+        /* Typography - Apple standard readable sizes */
+        .two-column-section .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: var(--apple-spacing-m);
+            color: var(--apple-text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .two-column-section .section-content {
+            font-size: 17px;
+            line-height: 1.47059;
+            color: var(--apple-text-secondary);
+            font-weight: 400;
+            letter-spacing: -0.022em;
+        }
+
+        .two-column-section .section-content h3 {
+            font-size: 19px;
+            font-weight: 600;
+            color: var(--apple-text-primary);
+            margin-bottom: var(--apple-spacing-s);
+            letter-spacing: -0.016em;
+        }
+
+        /* Image Gallery */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--apple-spacing-l);
+            margin-bottom: var(--apple-spacing-huge);
+        }
+
+        .gallery-item {
+            border-radius: var(--apple-radius-medium);
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: var(--apple-spacing-l);
+                border-right: none;
+                border-bottom: 0.5px solid var(--apple-separator);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: var(--apple-spacing-l);
+                max-width: 100%;
+            }
+
+            .project-title {
+                font-size: 32px;
+            }
+
+            .project-meta {
+                flex-direction: column;
+                gap: var(--apple-spacing-l);
+            }
+
+            .project-tags {
+                flex-wrap: wrap;
+            }
+
+            .container {
+                flex-direction: column;
+            }
+        }
+
+        /* Smooth scrolling for the entire page */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Animation classes for smooth content reveal */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered animation for content sections */
+        .content-section.fade-in-section {
+            transition-delay: 0.1s;
+        }
+
+        .content-section:nth-child(even).fade-in-section {
+            transition-delay: 0.2s;
+        }
+
+        /* Meta column animations */
+        .meta-column:nth-child(1).fade-in-section { transition-delay: 0.1s; }
+        .meta-column:nth-child(2).fade-in-section { transition-delay: 0.2s; }
+        .meta-column:nth-child(3).fade-in-section { transition-delay: 0.3s; }
+        .meta-column:nth-child(4).fade-in-section { transition-delay: 0.4s; }
+
+        /* Hero image fade in */
+        .hero-image.fade-in-section {
+            transition-delay: 0s;
+            transition-duration: 1.2s;
+        }
+
+        /* Two column section animations */
+        .two-column-section .content-section:first-child.fade-in-section {
+            transition-delay: 0.1s;
+        }
+
+        .two-column-section .content-section:last-child.fade-in-section {
+            transition-delay: 0.3s;
+        }
+
+        /* Gallery item animations */
+        .gallery-item.fade-in-section {
+            transition-delay: 0.2s;
+        }
+
+        /* Single Column Gallery - Full Width (matching comma.ai style) */
+        .single-column-gallery {
+            display: flex;
+            flex-direction: column;
+            gap: var(--apple-spacing-l);
+            margin: var(--apple-spacing-l) 0;
+            width: 100%;
+            max-width: none;
+        }
+
+        .gallery-item-single {
+            width: 100%;
+            border-radius: var(--apple-radius-medium);
+            overflow: hidden;
+            max-width: none;
+        }
+
+        .gallery-item-single img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Research Question Section */
+        .research-question-section {
+            text-align: center;
+            margin: var(--apple-spacing-huge) 0;
+            padding: var(--apple-spacing-xl) 0;
+        }
+
+        .research-question {
+            font-size: 36px;
+            font-weight: 400;
+            font-family: 'Kalam', 'Caveat', 'Dancing Script', cursive, var(--apple-font-title-1);
+            color: var(--apple-text-primary);
+            margin: 0;
+            letter-spacing: 0.02em;
+            line-height: 1.3;
+            max-width: 800px;
+            margin: 0 auto;
+            transform: rotate(-1deg);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Process Step Styling */
+        .process-step {
+            margin-bottom: var(--apple-spacing-huge);
+        }
+
+        .step-content {
+            margin-bottom: var(--apple-spacing-l);
+        }
+
+        .step-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--apple-text-primary);
+            margin-bottom: var(--apple-spacing-s);
+            font-family: var(--apple-font-title-2);
+        }
+
+        .step-description {
+            font-size: 17px;
+            color: var(--apple-text-secondary);
+            line-height: 1.47059;
+            margin: 0;
+        }
+
+        /* Problem Definition Styling */
+        .problem-definition {
+            background: var(--apple-gray-light);
+            padding: var(--apple-spacing-l);
+            border-radius: var(--apple-radius-medium);
+            margin: var(--apple-spacing-m) 0;
+        }
+
+        .problem-list {
+            list-style: none;
+            margin: var(--apple-spacing-m) 0 0 0;
+            padding: 0;
+        }
+
+        .problem-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: var(--apple-spacing-m);
+            gap: var(--apple-spacing-s);
+        }
+
+        .problem-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Workflow Diagram */
+        .workflow-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--apple-spacing-l);
+            padding: var(--apple-spacing-xl);
+            background: var(--apple-gray-light);
+            border-radius: var(--apple-radius-medium);
+            margin: var(--apple-spacing-l) 0;
+            flex-wrap: wrap;
+        }
+
+        .workflow-step {
+            text-align: center;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .workflow-icon {
+            font-size: 48px;
+            margin-bottom: var(--apple-spacing-s);
+        }
+
+        .workflow-step h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--apple-text-primary);
+            margin-bottom: var(--apple-spacing-xs);
+        }
+
+        .workflow-step p {
+            font-size: 14px;
+            color: var(--apple-text-secondary);
+            margin: 0;
+        }
+
+        .workflow-arrow {
+            font-size: 24px;
+            color: var(--apple-text-secondary);
+            flex-shrink: 0;
+        }
+
+        /* Pain Points Grid */
+        .pain-points-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--apple-spacing-l);
+            margin: var(--apple-spacing-l) 0;
+        }
+
+        .pain-point-card {
+            padding: var(--apple-spacing-l);
+            border-radius: var(--apple-radius-medium);
+            text-align: center;
+            transition: transform 0.3s ease, backdrop-filter 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pain-point-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            border-radius: var(--apple-radius-medium);
+            pointer-events: none;
+        }
+
+        .pain-point-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .pain-point-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .pain-point-icon {
+            font-size: 32px;
+            margin-bottom: var(--apple-spacing-s);
+        }
+
+        .pain-point-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--apple-text-primary);
+            margin-bottom: var(--apple-spacing-s);
+            position: relative;
+            z-index: 1;
+        }
+
+        .pain-point-card p {
+            font-size: 14px;
+            color: var(--apple-text-secondary);
+            line-height: 1.4;
+            position: relative;
+            z-index: 1;
+        }
+
+        .pain-point-icon {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--apple-text-secondary);
+            margin-bottom: var(--apple-spacing-s);
+            position: relative;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Solution Question */
+        .solution-question-section {
+            text-align: center;
+            margin: var(--apple-spacing-huge) 0;
+        }
+
+        .solution-question {
+            font-size: 36px;
+            font-weight: 400;
+            font-family: 'Kalam', 'Caveat', 'Dancing Script', cursive, var(--apple-font-title-1);
+            color: var(--apple-text-primary);
+            margin: 0;
+            letter-spacing: 0.02em;
+            line-height: 1.3;
+            transform: rotate(-1deg);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Testing Question */
+        .testing-question-section {
+            text-align: center;
+            margin: var(--apple-spacing-huge) 0;
+        }
+
+        .testing-question {
+            font-size: 36px;
+            font-weight: 400;
+            font-family: 'Kalam', 'Caveat', 'Dancing Script', cursive, var(--apple-font-title-1);
+            color: var(--apple-text-primary);
+            margin: 0;
+            letter-spacing: 0.02em;
+            line-height: 1.3;
+            transform: rotate(-1deg);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Workflow Question */
+        .workflow-question-section {
+            text-align: center;
+            margin: var(--apple-spacing-huge) 0;
+        }
+
+        .workflow-question {
+            font-size: 28px;
+            font-weight: 400;
+            font-family: 'Kalam', 'Caveat', 'Dancing Script', cursive, var(--apple-font-title-1);
+            color: var(--apple-text-primary);
+            margin: 0;
+            letter-spacing: 0.02em;
+            line-height: 1.3;
+            transform: rotate(-1deg);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Enhanced Workflow Diagram */
+        .workflow-diagram-enhanced {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--apple-spacing-xl);
+            padding: var(--apple-spacing-l);
+            margin: var(--apple-spacing-l) 0;
+            flex-wrap: wrap;
+        }
+
+        .workflow-step-enhanced {
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+            padding: var(--apple-spacing-l);
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .workflow-step-enhanced:hover {
+            transform: translateY(-2px);
+        }
+
+        .workflow-icon-enhanced {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--apple-text-secondary);
+            margin-bottom: var(--apple-spacing-s);
+            position: relative;
+            z-index: 2;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .workflow-step-enhanced h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--apple-text-primary);
+            margin-bottom: var(--apple-spacing-xs);
+            position: relative;
+            z-index: 2;
+        }
+
+        .workflow-step-enhanced p {
+            font-size: 14px;
+            color: var(--apple-text-secondary);
+            margin: 0 0 var(--apple-spacing-xs) 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step-detail {
+            font-size: 12px;
+            color: var(--apple-text-tertiary);
+            font-style: italic;
+            position: relative;
+            z-index: 2;
+        }
+
+        .workflow-arrow-enhanced {
+            font-size: 24px;
+            color: var(--apple-text-secondary);
+            flex-shrink: 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Analogy Section */
+        .analogy-section {
+            text-align: left;
+            margin: var(--apple-spacing-l) 0;
+            padding: var(--apple-spacing-l);
+            border-radius: var(--apple-radius-medium);
+        }
+
+        .analogy-text {
+            font-size: 18px;
+            font-weight: 500;
+            margin: 0;
+            color: var(--apple-text-primary);
+        }
+
+        /* Single Image Row */
+        .single-image-row {
+            display: flex;
+            justify-content: center;
+            margin: var(--apple-spacing-l) 0;
+        }
+
+        .single-image-row .image-with-caption {
+            width: auto;
+            max-width: none;
+        }
+
+        .single-image-row .image-with-caption img {
+            width: 100%;
+            height: 600px;
+            max-width: none;
+            object-fit: cover;
+            border-radius: var(--apple-radius-medium);
+            margin-bottom: var(--apple-spacing-s);
+        }
+
+        .handwritten-insight {
+            text-align: center;
+            margin: var(--apple-spacing-l) 0;
+        }
+
+        .handwritten-insight p {
+            font-family: 'Kalam', 'Caveat', 'Dancing Script', cursive, var(--apple-font-title-1);
+            font-size: 36px;
+            font-weight: 400;
+            color: var(--apple-text-primary);
+            line-height: 1.3;
+            transform: rotate(1deg);
+            margin: 0;
+            letter-spacing: 0.02em;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Two Image Row */
+        .two-image-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--apple-spacing-l);
+            margin: var(--apple-spacing-l) 0;
+            align-items: start;
+        }
+
+        /* Three Image Row */
+        .three-image-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: var(--apple-spacing-l);
+            margin: var(--apple-spacing-l) 0;
+            align-items: start;
+        }
+
+        .image-with-caption {
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .image-with-caption img {
+            width: 100%;
+            height: auto;
+            border-radius: var(--apple-radius-medium);
+            margin-bottom: var(--apple-spacing-s);
+            object-fit: contain;
+        }
+
+        .image-caption {
+            font-size: 14px;
+            color: var(--apple-text-secondary);
+            font-style: italic;
+            margin: 0;
+            margin-top: auto;
+        }
+
+        /* Location Description */
+        .location-description {
+            text-align: left;
+            margin: var(--apple-spacing-l) 0;
+        }
+
+        .location-description p {
+            font-size: 16px;
+            color: var(--apple-text-secondary);
+            margin: var(--apple-spacing-xs) 0;
+        }
+
+        /* Observation Content Container */
+        .observation-content {
+            margin: var(--apple-spacing-l) 0;
+        }
+
+        /* Observation Points */
+        .observation-points {
+            padding: var(--apple-spacing-l);
+            border-radius: var(--apple-radius-medium);
+            margin-bottom: var(--apple-spacing-l);
+            border: 1px solid var(--apple-separator);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+        }
+
+        .observation-points p {
+            font-size: 16px;
+            color: var(--apple-text-secondary);
+            margin: var(--apple-spacing-xs) 0;
+            line-height: 1.5;
+        }
+
+        /* Results Description */
+        .results-description {
+            text-align: left;
+            margin: var(--apple-spacing-l) 0;
+        }
+
+        .results-description p {
+            font-size: 16px;
+            color: var(--apple-text-secondary);
+            margin: var(--apple-spacing-xs) 0;
+        }
+
+        /* Findings Section */
+        .findings-section {
+            padding: var(--apple-spacing-l);
+            border-radius: var(--apple-radius-medium);
+            margin: var(--apple-spacing-l) 0;
+            text-align: left;
+            border: 1px solid var(--apple-separator);
+        }
+
+        .findings-text {
+            font-size: 18px;
+            font-weight: 500;
+            margin: 0;
+            line-height: 1.4;
+            color: var(--apple-text-primary);
+        }
+
+        /* Enhanced Findings Section */
+        .findings-section-enhanced {
+            padding: var(--apple-spacing-xl);
+            border-radius: var(--apple-radius-medium);
+            margin: var(--apple-spacing-l) 0;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .findings-text-enhanced {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 0;
+            line-height: 1.4;
+            color: var(--apple-text-primary);
+            font-family: var(--apple-font-title-2);
+            letter-spacing: -0.02em;
+        }
+
+        /* Note Text */
+        .note-text {
+            text-align: left;
+            margin: var(--apple-spacing-m) 0;
+        }
+
+        .note-text p {
+            font-size: 16px;
+            color: var(--apple-text-secondary);
+            font-style: italic;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        /* Brainstorming Sticker Note */
+        .brainstorming-sticker-container {
+            position: relative;
+            display: block;
+            width: 100%;
+        }
+
+        .brainstorming-sticker {
+            position: absolute;
+            bottom: var(--apple-spacing-xl);
+            left: var(--apple-spacing-m);
+            background: #87CEEB;
+            padding: var(--apple-spacing-l);
+            max-width: 350px;
+            box-shadow: 
+                0 4px 12px rgba(0, 0, 0, 0.2),
+                0 2px 4px rgba(0, 0, 0, 0.1);
+            border: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 10;
+            color: #000000;
+            font-size: 15px;
+            line-height: 1.5;
+            font-family: 'Kalam', 'Caveat', 'Dancing Script', cursive, var(--apple-font-body);
+            font-weight: 400;
+            cursor: grab;
+            user-select: none;
+            transform: rotate(-2deg);
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .brainstorming-sticker::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 8px;
+            background: #5F9EA0;
+            border-radius: 50%;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .brainstorming-sticker::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: -2px;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(45deg, transparent 50%, rgba(0, 0, 0, 0.1) 50%);
+            border-radius: 0 0 2px 0;
+        }
+
+        .brainstorming-sticker::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            right: 20px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 8px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .brainstorming-sticker-container:hover .brainstorming-sticker {
+            opacity: 1;
+            visibility: visible;
+            transform: rotate(-2deg) scale(1.02);
+        }
+
+        .brainstorming-sticker:active {
+            cursor: grabbing;
+        }
+
+        /* Drag functionality for brainstorming sticker */
+        .brainstorming-sticker.dragging {
+            opacity: 0.9;
+            transform: rotate(-2deg) scale(1.05);
+            transition: none;
+            cursor: grabbing !important;
+            z-index: 1000;
+        }
+
+
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .research-question {
+                font-size: 28px;
+                transform: rotate(-0.5deg);
+            }
+            
+            .workflow-diagram {
+                flex-direction: column;
+                gap: var(--apple-spacing-m);
+            }
+            
+            .workflow-arrow {
+                transform: rotate(90deg);
+            }
+            
+            .problem-list li {
+                flex-direction: column;
+                gap: var(--apple-spacing-xs);
+            }
+
+            .pain-points-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .two-image-row,
+            .three-image-row {
+                grid-template-columns: 1fr;
+            }
+
+            .workflow-diagram-enhanced {
+                flex-direction: column;
+                gap: var(--apple-spacing-m);
+            }
+            
+            .workflow-arrow-enhanced {
+                transform: rotate(90deg);
+            }
+        }
+
+        /* Reduce motion for users who prefer it */
+        @media (prefers-reduced-motion: reduce) {
+            .fade-in-section {
+                transition: none;
+            }
+            
+            html {
+                scroll-behavior: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Progress Bar -->
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+
+
+        <!-- Left Sidebar -->
+        <nav class="sidebar">
+            <!-- Simple Back to Home -->
+            <div class="sidebar-back">
+                <a href="kelly_portfolio.html">
+                    <span class="back-icon">←</span>
+                    <span>Home</span>
+                </a>
+            </div>
+
+            <ul class="nav-menu">
+                <!-- Navigation will be populated by JavaScript -->
+            </ul>
+
+            <div class="project-list" id="project-list">
+                <ul>
+                    <!-- Project list will be populated by JavaScript -->
+                </ul>
+            </div>
+        </nav>
+
+        <main class="main-content">
+        <!-- Hero Image at Top -->
+        <div class="hero-image fade-in-section">
+            <img src="image/Weill cornell/main.png" alt="Weill Cornell Medicine Project Hero Image">
+            <!-- Scroll Down Indicator -->
+            <div class="scroll-indicator">
+                <div class="scroll-arrow">
+                    <span>Scroll</span>
+                </div>
+                <div class="scroll-text">Scroll to explore</div>
+            </div>
+        </div>
+
+        <!-- Project Meta Info in Four Column Format -->
+        <div class="project-meta-below">
+            <div class="meta-column fade-in-section">
+                <h3>Timeline —</h3>
+                <p>6 Months</p>
+            </div>
+            <div class="meta-column fade-in-section">
+                <h3>Role —</h3>
+                <p>Designer<br>User Researcher</p>
+            </div>
+            <div class="meta-column fade-in-section">
+                <h3>For —</h3>
+                <p>Cornell Tech - Product Studio<br>Weill Cornell Medicine</p>
+            </div>
+            <div class="meta-column fade-in-section">
+                <h3>With —</h3>
+                <p>Darby Marx<br>Dillanie Sumanthiran<br>Johnny Lu<br>Kevin Warinata</p>
+            </div>
+        </div>
+
+        <!-- Project Overview & Challenge - Two Column Layout -->
+        <div class="two-column-section">
+            <section class="content-section fade-in-section" id="overview">
+                <h2 class="section-title">Overview</h2>
+                <div class="section-content">
+                    <p>A comprehensive UX research project focused on understanding the challenges seniors face when selecting Medicare plans. This research aims to identify pain points and design solutions that simplify the Medicare selection process for elderly users.</p>
+                    <p>Through extensive user interviews and behavioral observations, this project develops insights into senior-friendly design principles and creates an AI-powered platform to assist elderly users in making informed healthcare decisions.</p>
+                </div>
+            </section>
+
+            <section class="content-section fade-in-section" id="my-role">
+                <h2 class="section-title">My Role</h2>
+                <div class="section-content">
+                    <h3>UX Researcher & Designer</h3>
+                    <p>Led comprehensive user research including 11 in-depth interviews (6 seniors + 3 caregivers + 4 experts) to understand Medicare selection challenges. Conducted user testing at Roosevelt Island Senior Center and performed behavioral observations.</p>
+                    <p>Designed and prototyped an AI-powered platform solution that provides personalized Medicare recommendations, focusing on senior-friendly interface design and accessibility principles.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Research Question - Centered -->
+        <div class="research-question-section fade-in-section">
+            <h2 class="research-question">What are some difficulties when seniors choosing Medicare?</h2>
+        </div>
+
+        <!-- Process Images (Clean Layout) -->
+        <div class="single-column-gallery">
+            <div class="gallery-item-single fade-in-section">
+                <img src="image/Weill cornell/put before the outcome /1.png" alt="Medicare Research Process">
+            </div>
+        </div>
+
+        <!-- Current Solution Pain Points -->
+        <section class="content-section fade-in-section">
+            <div class="pain-points-grid">
+                <div class="pain-point-card">
+                    <div class="pain-point-icon">Personalization</div>
+                    <h3>Lack of Personalization</h3>
+                    <p>Generic recommendations without considering individual health needs and financial situations</p>
+                </div>
+                <div class="pain-point-card">
+                    <div class="pain-point-icon">Bias</div>
+                    <h3>Information Bias</h3>
+                    <p>Limited options presented, often favoring certain insurance providers or plans</p>
+                </div>
+                <div class="pain-point-card">
+                    <div class="pain-point-icon">Complexity</div>
+                    <h3>Complexity Confusion</h3>
+                    <p>Overwhelming amount of information and complex terminology that confuses seniors</p>
+                </div>
+                <div class="pain-point-card">
+                    <div class="pain-point-icon">Accessibility</div>
+                    <h3>Not Senior-Friendly</h3>
+                    <p>Interfaces designed for younger users, ignoring accessibility needs of elderly population</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solution Section -->
+        <section class="content-section fade-in-section">
+            <div class="solution-question-section">
+                <h2 class="solution-question">What is our solution?</h2>
+            </div>
+            <div class="gallery-item-single fade-in-section">
+                <div class="brainstorming-sticker-container" style="width: 100%;">
+                    <img src="image/Weill cornell/put before the outcome /Solution Brainstorming.png" alt="Solution Brainstorming" style="width: 100%; height: auto; display: block;">
+                    <div class="brainstorming-sticker" draggable="true">
+                        <p>It is like 'Expedia' In Choosing the Insurance with AI powered</p>
+                    </div>
+                </div>
+            </div>
+            <div class="note-text">
+                <p>"After brainstorming session, we come out with our designed Product Workflow"</p>
+            </div>
+        </section>
+
+        <!-- Product Workflow Design -->
+        <section class="content-section fade-in-section">
+            <div class="workflow-diagram-enhanced">
+                <div class="workflow-step-enhanced">
+                    <div class="workflow-icon-enhanced">Upload</div>
+                    <h4>Data Upload</h4>
+                    <p>Upload Medical & Financial History to our platform</p>
+                    <p class="step-detail">Users upload their medical and financial history data to the platform</p>
+                </div>
+                <div class="workflow-arrow-enhanced">→</div>
+                <div class="workflow-step-enhanced">
+                    <div class="workflow-icon-enhanced">Analysis</div>
+                    <h4>AI Analysis Processing</h4>
+                    <p>Received Personalized Healthcare & Insurance Plans (Deep Learning Model)</p>
+                    <p class="step-detail">Generate personalized medical and insurance plans through deep learning model</p>
+                </div>
+                <div class="workflow-arrow-enhanced">→</div>
+                <div class="workflow-step-enhanced">
+                    <div class="workflow-icon-enhanced">Service</div>
+                    <h4>Smart Customer Service</h4>
+                    <p>Chat with our LLM AI-Chatbot about the personalized plans for questions/changes</p>
+                    <p class="step-detail">Q&A and modifications with LLM AI chatbot about personalized plans</p>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- User Testing Execution -->
+        <section class="content-section fade-in-section">
+            <div class="testing-question-section">
+                <h2 class="testing-question">How do we validate our solution with real users?</h2>
+            </div>
+            <div class="two-image-row">
+                <div class="image-with-caption">
+                    <img src="image/Weill cornell/put before the outcome /user-testing-execution.jpg" alt="User Testing Execution">
+                    <p class="image-caption">"My responsibility is to design and execute the prototype test and do the analysis"</p>
+                </div>
+                <div class="image-with-caption">
+                    <img src="image/Weill cornell/put before the outcome /Project plan.png" alt="Project Plan">
+                    <p class="image-caption">Project planning and execution strategy</p>
+                </div>
+            </div>
+            <div class="two-image-row">
+                <div class="image-with-caption">
+                    <img src="image/Weill cornell/put before the outcome /Roosevelt Island Senior Center.png" alt="Roosevelt Island Senior Center">
+                    <p class="image-caption">Testing location at Roosevelt Island Senior Center</p>
+                </div>
+                <div class="image-with-caption">
+                    <img src="image/Weill cornell/put before the outcome /Behavior Observation.png" alt="Behavior Observation">
+                    <p class="image-caption">Behavior observation analysis</p>
+                </div>
+            </div>
+            <div class="location-description">
+                <p>"The experiment was conducted at the Roosevelt Island Senior Center"</p>
+                <p>"a central hub for the senior community on Roosevelt Island"</p>
+            </div>
+        </section>
+
+        <!-- Behavior Observation -->
+        <section class="content-section fade-in-section">
+            <h2 class="section-title">Behavior Observation</h2>
+            <div class="section-content">
+                <p>• Are they willing to provided personal information</p>
+                <p>• Will they click enroll now, or just using our site to generate and go to official site to buy the plan</p>
+                <p>"For User side, we also want to test out which kind of information displays they preferred"</p>
+            </div>
+        </section>
+
+        <!-- User Feedback Insights -->
+        <section class="content-section fade-in-section">
+            <div class="single-image-row">
+                <div class="image-with-caption">
+                    <img src="image/Weill cornell/put before the outcome /user-feedback-insights.jpg" alt="User Feedback Insights">
+                    <p class="image-caption">Interview and User Feedback</p>
+                </div>
+            </div>
+            <div class="handwritten-insight">
+                <p>Surprisingly, most of senior prefer single layout instead of "multiple options" layout. and they mentioned they would like to have a detail comparison chart if it is possible.</p>
+            </div>
+        </section>
+
+
+
+        <!-- The Outcome -->
+        <section class="content-section fade-in-section" id="outcome">
+            <h2 class="section-title">The Outcome</h2>
+            <div class="section-content">
+                <p>Through in-depth user research and prototype testing, we successfully identified key pain points seniors face in the Medicare selection process and designed targeted solutions.</p>
+            </div>
+        </section>
+        
+        <!-- Outcome Results Gallery - Clean Layout -->
+        <div class="single-column-gallery">
+            <div class="gallery-item-single fade-in-section">
+                <img src="image/Weill cornell/the outcome/1.png" alt="User Feedback Insights">
+            </div>
+            <div class="gallery-item-single fade-in-section">
+                <img src="image/Weill cornell/the outcome/2.png" alt="Final Design Solution">
+            </div>
+        </div>
+
+
+
+
+
+
+    </main>
+
+    <!-- Portfolio Configuration -->
+    <script src="portfolio-config.js"></script>
+    <script src="portfolio-manager.js"></script>
+    <script>
+        // Smooth Scroll Animation System
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Weill Cornell Medicine page: Initializing with animations...');
+            
+            // Initialize Portfolio Manager like main page
+            const portfolioManager = new PortfolioManager();
+            portfolioManager.init();
+            
+            // Add active highlighting for current project
+            setTimeout(() => {
+                const currentProjectLinks = document.querySelectorAll('.project-link');
+                currentProjectLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.href.includes('weill-cornell-medicine.html')) {
+                        link.classList.add('active');
+                    }
+                });
+            }, 100);
+
+            // Initialize Smooth Scroll Animations
+            initSmoothScrollAnimations();
+        });
+
+        function initSmoothScrollAnimations() {
+            // Add fade-in-section class to all animatable elements
+            const animatableElements = [
+                '.hero-image',
+                '.project-meta-below',
+                '.meta-column',
+                '.content-section',
+                '.gallery-item'
+            ];
+
+            animatableElements.forEach(selector => {
+                const elements = document.querySelectorAll(selector);
+                elements.forEach(element => {
+                    element.classList.add('fade-in-section');
+                });
+            });
+
+            // Create Intersection Observer for smooth reveal animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all fade-in sections
+            const fadeElements = document.querySelectorAll('.fade-in-section');
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+
+            // Immediately show hero image on load
+            setTimeout(() => {
+                const heroImage = document.querySelector('.hero-image');
+                if (heroImage) {
+                    heroImage.classList.add('is-visible');
+                }
+            }, 100);
+        }
+
+        // Enhanced smooth scrolling for anchor links
+        document.addEventListener('click', (e) => {
+            const target = e.target.closest('a[href^="#"]');
+            if (target) {
+                e.preventDefault();
+                const targetId = target.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+        });
+
+
+    </script>
+    
+    <script>
+        // Load saved theme preference
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('themeMode');
+            const body = document.body;
+            const toggleSwitch = document.querySelector('.toggle-switch');
+            const toggleIcon = document.querySelector('.toggle-icon');
+            
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+                body.classList.remove('light-mode');
+                toggleSwitch.classList.add('dark');
+                toggleIcon.textContent = '🌙';
+            } else {
+                body.classList.add('light-mode');
+                body.classList.remove('dark-mode');
+                toggleSwitch.classList.remove('dark');
+                toggleIcon.textContent = '☀️';
+            }
+
+            // Progress bar functionality
+            const progressFill = document.getElementById('progressFill');
+            
+            function updateProgress() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercentage = (scrollTop / scrollHeight) * 100;
+                
+                progressFill.style.height = Math.min(scrollPercentage, 100) + '%';
+            }
+
+            window.addEventListener('scroll', updateProgress);
+            window.addEventListener('resize', updateProgress);
+            
+            // Initial progress update
+            updateProgress();
+        });
+    </script>
+    <!-- Ensure current project is highlighted -->
+    <script>
+        // Ensure current project is highlighted and initialize theme
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize theme - Default to dark mode
+            const savedTheme = localStorage.getItem('themeMode');
+            const body = document.body;
+            const toggleSwitch = document.querySelector('.toggle-switch');
+            const toggleIcon = document.querySelector('.toggle-icon');
+            
+            if (savedTheme === 'light') {
+                body.classList.add('light-mode');
+                body.classList.remove('dark-mode');
+                toggleSwitch.classList.add('light');
+                toggleIcon.textContent = '☀️';
+            } else {
+                // Default to dark mode
+                body.classList.add('dark-mode');
+                body.classList.remove('light-mode');
+                toggleSwitch.classList.remove('light');
+                toggleIcon.textContent = '🌙';
+                localStorage.setItem('themeMode', 'dark');
+            }
+            
+            setTimeout(() => {
+                const currentProjectLinks = document.querySelectorAll('.project-link');
+                currentProjectLinks.forEach(link => {
+                    if (link.href.includes('weill-cornell-medicine.html')) {
+                        link.classList.add('active');
+                        console.log('Weill Cornell Medicine link highlighted');
+                    }
+                });
+            }, 100);
+        });
+    </script>
+
+    <!-- Scroll Indicator Functionality -->
+    <script>
+        // Hide scroll indicator on scroll
+        function initScrollIndicator() {
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            if (scrollIndicator) {
+                let hasScrolled = false;
+                
+                window.addEventListener('scroll', function() {
+                    if (!hasScrolled && window.scrollY > 50) {
+                        hasScrolled = true;
+                        scrollIndicator.classList.add('hidden');
+                    }
+                });
+                
+                // Click handler for scroll indicator
+                scrollIndicator.addEventListener('click', function() {
+                    const firstSection = document.querySelector('.project-meta-below') || document.querySelector('.content-section');
+                    if (firstSection) {
+                        firstSection.scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initScrollIndicator();
+            
+            // Initialize drag functionality for brainstorming sticker
+            initBrainstormingStickerDrag();
+        });
+
+        // Drag functionality for brainstorming sticker
+        function initBrainstormingStickerDrag() {
+            const brainstormingSticker = document.querySelector('.brainstorming-sticker');
+            if (brainstormingSticker) {
+                let isDragging = false;
+                let currentX;
+                let currentY;
+                let initialX;
+                let initialY;
+                let xOffset = 0;
+                let yOffset = 0;
+
+                function dragStart(e) {
+                    e.preventDefault();
+                    initialX = e.clientX - xOffset;
+                    initialY = e.clientY - yOffset;
+                    isDragging = true;
+                    brainstormingSticker.classList.add('dragging');
+                }
+
+                function drag(e) {
+                    if (isDragging) {
+                        e.preventDefault();
+                        currentX = e.clientX - initialX;
+                        currentY = e.clientY - initialY;
+                        xOffset = currentX;
+                        yOffset = currentY;
+                        setTranslate(currentX, currentY, brainstormingSticker);
+                    }
+                }
+
+                function setTranslate(xPos, yPos, el) {
+                    el.style.transform = `rotate(-2deg) translate3d(${xPos}px, ${yPos}px, 0)`;
+                }
+
+                function dragEnd(e) {
+                    isDragging = false;
+                    brainstormingSticker.classList.remove('dragging');
+                }
+
+                // Remove existing listeners
+                brainstormingSticker.removeEventListener('mousedown', dragStart);
+                document.removeEventListener('mousemove', drag);
+                document.removeEventListener('mouseup', dragEnd);
+
+                // Add new listeners
+                brainstormingSticker.addEventListener('mousedown', dragStart);
+                document.addEventListener('mousemove', drag);
+                document.addEventListener('mouseup', dragEnd);
+            }
+        }
+    </script>
+</body>
+</html> 

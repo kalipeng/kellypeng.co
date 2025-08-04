@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résumé - Kelly Peng</title>
+    <style>
+        :root {
+            /* Apple Design System Colors */
+            --apple-blue: #87CEEB;
+            --apple-blue-dark: #0A84FF;
+            --apple-gray: #8E8E93;
+            --apple-gray-2: #AEAEB2;
+            --apple-gray-3: #C7C7CC;
+            --apple-gray-4: #D1D1D6;
+            --apple-gray-5: #E5E5EA;
+            --apple-gray-6: #F2F2F7;
+            
+            /* Apple Typography System - Complete set matching main page */
+            --apple-font-large-title: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            --apple-font-title-1: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            --apple-font-title-2: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            --apple-font-title-3: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            --apple-font-headline: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            --apple-font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            --apple-font-callout: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            --apple-font-subheadline: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            --apple-font-footnote: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            --apple-font-caption-1: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            --apple-font-caption-2: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            
+            /* Apple Spacing - Based on 8px grid system */
+            --apple-spacing-xs: 4px;
+            --apple-spacing-s: 8px;
+            --apple-spacing-m: 16px;
+            --apple-spacing-l: 24px;
+            --apple-spacing-xl: 32px;
+            --apple-spacing-xxl: 48px;
+            --apple-spacing-xxxl: 64px;
+            --apple-spacing-huge: 96px;
+            
+            /* Apple Border Radius */
+            --apple-radius-small: 6px;
+            --apple-radius-medium: 12px;
+            --apple-radius-large: 16px;
+            --apple-radius-xlarge: 20px;
+        }
+
+        /* Dark mode styles (default) */
+        body {
+            --apple-background: #000000;
+            --apple-background-secondary: #1C1C1E;
+            --apple-text-primary: #F2F2F7;
+            --apple-text-secondary: #8E8E93;
+            --apple-text-tertiary: #8E8E9399;
+            --apple-separator: #38383A;
+            --apple-gray-light: #2C2C2E;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--apple-font-body);
+            background-color: var(--apple-background);
+            color: var(--apple-text-primary);
+            line-height: 1.47059;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: "kern" 1;
+            text-rendering: optimizeLegibility;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Left Sidebar - Apple Style - EXACTLY like main page */
+        .sidebar {
+            width: 250px;
+            background-color: var(--apple-background);
+            padding: var(--apple-spacing-huge) var(--apple-spacing-l) var(--apple-spacing-l) var(--apple-spacing-xl);
+            border-right: 0.5px solid var(--apple-separator);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        /* Simple Back Icon in Sidebar */
+        .sidebar-back {
+            margin-bottom: var(--apple-spacing-huge);
+            padding-bottom: var(--apple-spacing-l);
+            border-bottom: 0.5px solid var(--apple-separator);
+        }
+
+        .sidebar-back a {
+            text-decoration: none;
+            color: var(--apple-text-primary);
+            font-size: 17px;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: var(--apple-spacing-s);
+            transition: color 0.3s ease;
+            font-family: var(--apple-font-body);
+            letter-spacing: -0.022em;
+        }
+
+        .sidebar-back a:hover {
+            color: var(--apple-blue);
+        }
+
+        .back-icon {
+            font-size: 20px;
+            font-weight: 300;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-menu li {
+            margin-bottom: var(--apple-spacing-xs);
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--apple-text-primary);
+            font-size: 17px;
+            font-weight: 400;
+            display: block;
+            padding: var(--apple-spacing-s) 0;
+            transition: color 0.3s ease;
+            font-family: var(--apple-font-body);
+            letter-spacing: -0.022em;
+        }
+
+        .nav-menu a:hover {
+            color: var(--apple-blue);
+        }
+
+        .nav-menu a.active {
+            color: var(--apple-blue);
+            font-weight: 500;
+        }
+
+        .nav-menu a.external-link::after {
+            content: " ↗";
+            font-size: 14px;
+            opacity: 0.6;
+            margin-left: 4px;
+        }
+
+        /* Project List in Sidebar - EXACTLY like main page */
+        .project-list {
+            margin-top: var(--apple-spacing-huge);
+            padding-top: var(--apple-spacing-l);
+            border-top: 0.5px solid var(--apple-separator);
+        }
+
+        .project-list ul {
+            list-style: none;
+        }
+
+        .project-list li {
+            margin-bottom: var(--apple-spacing-xs);
+        }
+
+        .project-list a {
+            text-decoration: none;
+            color: var(--apple-text-secondary);
+            font-size: 15px;
+            display: block;
+            padding: var(--apple-spacing-xs) 0;
+            transition: color 0.3s ease;
+            font-family: var(--apple-font-body);
+            letter-spacing: -0.016em;
+        }
+
+        .project-list a:hover {
+            color: var(--apple-text-primary);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            padding: var(--apple-spacing-huge) var(--apple-spacing-huge) var(--apple-spacing-huge) 80px;
+            max-width: 1080px;
+        }
+
+        /* Resume Content Styles */
+        .resume-header {
+            margin-bottom: var(--apple-spacing-huge);
+        }
+
+        .resume-title {
+            font-size: 48px;
+            font-weight: 600;
+            color: var(--apple-text-primary);
+            margin-bottom: var(--apple-spacing-l);
+            font-family: var(--apple-font-large-title);
+            letter-spacing: -0.003em;
+        }
+
+        .resume-subtitle {
+            font-size: 24px;
+            color: var(--apple-text-secondary);
+            margin-bottom: var(--apple-spacing-m);
+            font-family: var(--apple-font-title-2);
+            letter-spacing: -0.016em;
+        }
+
+        .pdf-download {
+            margin-top: var(--apple-spacing-l);
+            text-align: center;
+        }
+
+        .pdf-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--apple-spacing-s);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: var(--apple-blue);
+            text-decoration: none;
+            padding: var(--apple-spacing-m) var(--apple-spacing-l);
+            border-radius: var(--apple-radius-medium);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 17px;
+            font-family: var(--apple-font-body);
+            letter-spacing: -0.022em;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            box-shadow: 
+                0 4px 16px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .pdf-link:hover {
+            background: var(--apple-blue);
+            color: var(--apple-background);
+            transform: translateY(-1px);
+        }
+
+
+
+        .pdf-viewer-container {
+            margin-top: var(--apple-spacing-l);
+            padding: var(--apple-spacing-xl);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: var(--apple-radius-large);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 90vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pdf-viewer-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.1) 0%,
+                rgba(255, 255, 255, 0.05) 50%,
+                rgba(255, 255, 255, 0.1) 100%
+            );
+            border-radius: var(--apple-radius-large);
+            pointer-events: none;
+        }
+
+        .pdf-viewer-container iframe {
+            margin-bottom: var(--apple-spacing-l);
+            border-radius: var(--apple-radius-medium);
+            max-width: 90%;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .resume-section {
+            margin-bottom: var(--apple-spacing-huge);
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--apple-text-primary);
+            margin-bottom: var(--apple-spacing-l);
+            font-family: var(--apple-font-title-1);
+            letter-spacing: -0.003em;
+        }
+
+        .resume-item {
+            margin-bottom: var(--apple-spacing-xl);
+            padding-bottom: var(--apple-spacing-l);
+            border-bottom: 0.5px solid var(--apple-separator);
+        }
+
+        .resume-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--apple-text-primary);
+            margin-bottom: var(--apple-spacing-s);
+            font-family: var(--apple-font-title-2);
+            letter-spacing: -0.016em;
+        }
+
+        .item-subtitle {
+            font-size: 18px;
+            color: var(--apple-blue);
+            margin-bottom: var(--apple-spacing-s);
+            font-family: var(--apple-font-headline);
+            letter-spacing: -0.022em;
+        }
+
+        .item-date {
+            font-size: 15px;
+            color: var(--apple-text-tertiary);
+            margin-bottom: var(--apple-spacing-m);
+            font-family: var(--apple-font-subheadline);
+            letter-spacing: -0.016em;
+        }
+
+        .item-description {
+            font-size: 17px;
+            color: var(--apple-text-secondary);
+            line-height: 1.47059;
+            font-family: var(--apple-font-body);
+            letter-spacing: -0.022em;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--apple-spacing-l);
+            margin-top: var(--apple-spacing-l);
+        }
+
+        .skill-category {
+            background: var(--apple-background-secondary);
+            padding: var(--apple-spacing-l);
+            border-radius: var(--apple-radius-medium);
+            border: 0.5px solid var(--apple-separator);
+        }
+
+        .skill-category h4 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--apple-text-primary);
+            margin-bottom: var(--apple-spacing-m);
+            font-family: var(--apple-font-headline);
+            letter-spacing: -0.022em;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            font-size: 15px;
+            color: var(--apple-text-secondary);
+            margin-bottom: var(--apple-spacing-xs);
+            font-family: var(--apple-font-body);
+            letter-spacing: -0.016em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: var(--apple-spacing-l);
+                border-right: none;
+                border-bottom: 0.5px solid var(--apple-separator);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: var(--apple-spacing-l);
+            }
+
+            .container {
+                flex-direction: column;
+            }
+
+            .resume-title {
+                font-size: 36px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth scrolling for the entire page */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Animation classes for smooth content reveal */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Sidebar -->
+        <nav class="sidebar">
+            <!-- Simple Back to Home -->
+            <div class="sidebar-back">
+                <a href="kelly_portfolio.html">
+                    <span class="back-icon">←</span>
+                    <span>Home</span>
+                </a>
+            </div>
+
+            <ul class="nav-menu">
+                <!-- Navigation will be populated by JavaScript -->
+            </ul>
+
+            <div class="project-list" id="project-list">
+                <ul>
+                    <!-- Project list will be populated by JavaScript -->
+                </ul>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <!-- Resume Header -->
+            <div class="resume-header fade-in-section">
+                <h1 class="resume-title">Résumé</h1>
+                <p class="resume-subtitle">Kelly Peng - Product Designer & UX Researcher</p>
+            </div>
+
+            <!-- Embedded PDF Viewer -->
+            <div class="pdf-viewer-container fade-in-section">
+                                        <iframe 
+                            src="resume.pdf" 
+                            width="100%" 
+                            height="1200px" 
+                            style="border: none; border-radius: var(--apple-radius-medium); background: var(--apple-background-secondary); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);"
+                            title="Kelly Peng Resume PDF">
+                        </iframe>
+                
+                <!-- PDF Download Link -->
+                <div class="pdf-download fade-in-section">
+                                                <a href="resume.pdf" target="_blank" class="pdf-link">
+                                <span>Download PDF Version</span>
+                            </a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Load configuration and management scripts -->
+    <script src="portfolio-config.js"></script>
+    <script src="portfolio-manager.js"></script>
+    
+    <!-- Initialize Portfolio Manager -->
+    <script>
+        // Initialize portfolio manager
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize portfolio manager
+            const portfolioManager = new PortfolioManager();
+            portfolioManager.init();
+            
+            // Initialize smooth scroll animations
+            initSmoothScrollAnimations();
+        });
+
+        // Initialize Smooth Scroll Animations
+        function initSmoothScrollAnimations() {
+            // Create Intersection Observer for smooth reveal animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all fade-in sections
+            const fadeElements = document.querySelectorAll('.fade-in-section');
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+        }
+    </script>
+</body>
+</html> 
