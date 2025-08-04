@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playground - Kelly Peng</title>
+    <!-- Google Fonts for handwritten style -->
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Apple Design System Colors */
+            --apple-blue: #87CEEB;
+            --apple-blue-dark: #0A84FF;
+            --apple-gray: #8E8E93;
+            --apple-gray-2: #AEAEB2;
+            --apple-gray-3: #C7C7CC;
+            --apple-gray-4: #D1D1D6;
+            --apple-gray-5: #E5E5EA;
+            --apple-gray-6: #F2F2F7;
+            
+            /* Apple Typography System - Complete set matching main page */
+            --apple-font-large-title: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            --apple-font-title-1: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            --apple-font-title-2: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            --apple-font-title-3: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+            --apple-font-headline: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            --apple-font-body: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            --apple-font-callout: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            --apple-font-subheadline: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            --apple-font-footnote: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            --apple-font-caption-1: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            --apple-font-caption-2: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+            
+            /* Apple Spacing - Based on 8px grid system */
+            --apple-spacing-xs: 4px;
+            --apple-spacing-s: 8px;
+            --apple-spacing-m: 16px;
+            --apple-spacing-l: 24px;
+            --apple-spacing-xl: 32px;
+            --apple-spacing-xxl: 48px;
+            --apple-spacing-xxxl: 64px;
+            --apple-spacing-huge: 96px;
+            
+            /* Apple Border Radius */
+            --apple-radius-small: 6px;
+            --apple-radius-medium: 12px;
+            --apple-radius-large: 16px;
+            --apple-radius-xlarge: 20px;
+        }
+
+        /* Dark mode styles (default) */
+        body.dark-mode,
+        body:not(.light-mode) {
+            --apple-background: #000000;
+            --apple-background-secondary: #1C1C1E;
+            --apple-text-primary: #F2F2F7;
+            --apple-text-secondary: #8E8E93;
+            --apple-text-tertiary: #8E8E9399;
+            --apple-separator: #38383A;
+            --apple-gray-light: #2C2C2E;
+        }
+
+        /* Light mode styles */
+        body.light-mode {
+            --apple-background: #F6F8FF;
+            --apple-background-secondary: #F6F8FF;
+            --apple-text-primary: #1D1D1F;
+            --apple-text-secondary: #86868B;
+            --apple-text-tertiary: #86868B99;
+            --apple-separator: #D1D1D6;
+            --apple-gray-light: #F2F2F7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--apple-font-body);
+            background-color: var(--apple-background);
+            color: var(--apple-text-primary);
+            line-height: 1.47059;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: "kern" 1;
+            text-rendering: optimizeLegibility;
+        }
+
+        /* Container Layout */
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Left Sidebar - Apple Style - EXACTLY like main page */
+        .sidebar {
+            width: 250px;
+            background-color: var(--apple-background);
+            padding: var(--apple-spacing-huge) var(--apple-spacing-l) var(--apple-spacing-l) var(--apple-spacing-xl);
+            border-right: 0.5px solid var(--apple-separator);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        /* Simple Back Icon in Sidebar */
+        .sidebar-back {
+            margin-bottom: var(--apple-spacing-l);
+            padding-bottom: var(--apple-spacing-l);
+            border-bottom: 0.5px solid var(--apple-separator);
+        }
+
+        .sidebar-back a {
+            display: flex;
+            align-items: center;
+            gap: var(--apple-spacing-s);
+            color: var(--apple-blue);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 400;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar-back a:hover {
+            opacity: 0.7;
+        }
+
+        .back-icon {
+            font-size: 16px;
+        }
+
+        .nav-menu {
+            list-style: none;
+        }
+
+        .nav-menu li {
+            margin-bottom: var(--apple-spacing-xs);
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--apple-text-primary);
+            font-size: 17px;
+            font-weight: 400;
+            display: block;
+            padding: var(--apple-spacing-s) 0;
+            transition: color 0.3s ease;
+            font-family: var(--apple-font-body);
+            letter-spacing: -0.022em;
+        }
+
+        .nav-menu a:hover {
+            color: var(--apple-blue);
+        }
+
+        .nav-menu a.active {
+            color: var(--apple-blue);
+            font-weight: 500;
+        }
+
+        /* Project List in Sidebar - EXACTLY like main page */
+        .project-list {
+            margin-top: var(--apple-spacing-xl);
+            padding-top: var(--apple-spacing-l);
+            border-top: 0.5px solid var(--apple-separator);
+        }
+
+        .project-list ul {
+            list-style: none;
+        }
+
+        .project-list li {
+            margin-bottom: var(--apple-spacing-xs);
+        }
+
+        .project-list a {
+            text-decoration: none;
+            color: var(--apple-text-secondary);
+            font-size: 15px;
+            display: block;
+            padding: var(--apple-spacing-xs) 0;
+            transition: color 0.3s ease;
+            font-family: var(--apple-font-body);
+            letter-spacing: -0.016em;
+        }
+
+        .project-list a:hover {
+            color: var(--apple-text-primary);
+        }
+
+        .project-list a.active {
+            color: var(--apple-blue);
+            font-weight: 500;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            padding: var(--apple-spacing-huge) var(--apple-spacing-huge) var(--apple-spacing-huge) 80px;
+            max-width: 1080px;
+        }
+
+        /* Gallery Title */
+        .gallery-title {
+            font-size: 48px;
+            font-weight: 600;
+            font-family: var(--apple-font-large-title);
+            color: var(--apple-text-primary);
+            margin-bottom: var(--apple-spacing-huge);
+            letter-spacing: -0.005em;
+        }
+
+        .gallery-subtitle {
+            font-size: 19px;
+            color: var(--apple-text-secondary);
+            margin-bottom: var(--apple-spacing-huge);
+            font-family: var(--apple-font-body);
+            letter-spacing: -0.022em;
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--apple-spacing-l);
+            margin-bottom: var(--apple-spacing-huge);
+        }
+
+        .gallery-item {
+            border-radius: var(--apple-radius-medium);
+            overflow: hidden;
+            background: var(--apple-background-secondary);
+            border: 0.5px solid var(--apple-separator);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+        }
+
+        .gallery-item img,
+        .gallery-item video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: var(--apple-radius-medium);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img,
+        .gallery-item:hover video {
+            transform: scale(1.02);
+        }
+
+        .gallery-caption {
+            padding: var(--apple-spacing-m);
+            font-size: 14px;
+            color: var(--apple-text-secondary);
+            font-family: var(--apple-font-caption-1);
+            letter-spacing: -0.016em;
+        }
+
+        /* Video specific styles */
+        .gallery-item video {
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: var(--apple-spacing-l);
+                border-right: none;
+                border-bottom: 0.5px solid var(--apple-separator);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: var(--apple-spacing-l);
+                max-width: 100%;
+            }
+
+            .gallery-title {
+                font-size: 32px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: var(--apple-spacing-m);
+            }
+
+            .container {
+                flex-direction: column;
+            }
+        }
+
+        /* Smooth scrolling for the entire page */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Animation classes for smooth content reveal */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Gallery item animations */
+        .gallery-item.fade-in-section {
+            transition-delay: 0.1s;
+        }
+
+        .gallery-item:nth-child(1).fade-in-section { transition-delay: 0.1s; }
+        .gallery-item:nth-child(2).fade-in-section { transition-delay: 0.2s; }
+        .gallery-item:nth-child(3).fade-in-section { transition-delay: 0.3s; }
+        .gallery-item:nth-child(4).fade-in-section { transition-delay: 0.4s; }
+        .gallery-item:nth-child(5).fade-in-section { transition-delay: 0.5s; }
+        .gallery-item:nth-child(6).fade-in-section { transition-delay: 0.6s; }
+        .gallery-item:nth-child(7).fade-in-section { transition-delay: 0.7s; }
+        .gallery-item:nth-child(8).fade-in-section { transition-delay: 0.8s; }
+        .gallery-item:nth-child(9).fade-in-section { transition-delay: 0.9s; }
+        .gallery-item:nth-child(10).fade-in-section { transition-delay: 1.0s; }
+
+        /* Reduce motion for users who prefer it */
+        @media (prefers-reduced-motion: reduce) {
+            .fade-in-section {
+                transition: none;
+            }
+            
+            html {
+                scroll-behavior: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Left Sidebar -->
+        <nav class="sidebar">
+            <!-- Simple Back to Home -->
+            <div class="sidebar-back">
+                <a href="index.html">
+                    <span class="back-icon">←</span>
+                    <span>Back Home</span>
+                </a>
+            </div>
+
+            <ul class="nav-menu">
+                <!-- Navigation will be populated by JavaScript -->
+            </ul>
+
+            <div class="project-list" id="project-list">
+                <ul>
+                    <!-- Project list will be populated by JavaScript -->
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1 class="gallery-title fade-in-section">Playground Gallery</h1>
+            <p class="gallery-subtitle fade-in-section">A collection of experimental work, creative explorations, and design experiments</p>
+            
+            <div class="gallery-grid">
+                <!-- Virtual Reality Community Game Design -->
+                <div class="gallery-item fade-in-section">
+                    <img src="image/Playground image/Virtual reality community game design.png" alt="Virtual Reality Community Game Design">
+                    <div class="gallery-caption">Virtual Reality Community Game Design</div>
+                </div>
+
+                <!-- Wall and Windows -->
+                <div class="gallery-item fade-in-section">
+                    <img src="image/Playground image/wall and windows.png" alt="Wall and Windows">
+                    <div class="gallery-caption">Wall and Windows</div>
+                </div>
+
+                <!-- Yuan Series -->
+                <div class="gallery-item fade-in-section">
+                    <img src="image/Playground image/yuan 1.png" alt="Yuan 1">
+                    <div class="gallery-caption">Yuan 1</div>
+                </div>
+
+                <div class="gallery-item fade-in-section">
+                    <img src="image/Playground image/yuan-02.png" alt="Yuan 02">
+                    <div class="gallery-caption">Yuan 02</div>
+                </div>
+
+                <div class="gallery-item fade-in-section">
+                    <img src="image/Playground image/yuan-03.png" alt="Yuan 03">
+                    <div class="gallery-caption">Yuan 03</div>
+                </div>
+
+                <!-- Accessible Keyboard -->
+                <div class="gallery-item fade-in-section">
+                    <img src="image/Playground image/Accessible keyboard.jpg" alt="Accessible Keyboard">
+                    <div class="gallery-caption">Accessible Keyboard</div>
+                </div>
+
+                <div class="gallery-item fade-in-section">
+                    <img src="image/Playground image/Accessible keyboard 2.JPG" alt="Accessible Keyboard 2">
+                    <div class="gallery-caption">Accessible Keyboard 2</div>
+                </div>
+
+                <!-- Running Pages -->
+                <div class="gallery-item fade-in-section">
+                    <img src="image/Playground image/RUNNING_Page_03.jpg" alt="Running Page 03">
+                    <div class="gallery-caption">Running Page 03</div>
+                </div>
+
+                <div class="gallery-item fade-in-section">
+                    <img src="image/Playground image/RUNNING_Page_05.jpg" alt="Running Page 05">
+                    <div class="gallery-caption">Running Page 05</div>
+                </div>
+
+                <!-- Book Mark -->
+                <div class="gallery-item fade-in-section">
+                    <img src="image/Playground image/book mark.png" alt="Book Mark">
+                    <div class="gallery-caption">Book Mark</div>
+                </div>
+
+                <!-- Videos -->
+                <div class="gallery-item fade-in-section">
+                    <video controls autoplay muted loop>
+                        <source src="image/Playground image/p5js pixels effect.mov" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="gallery-caption">P5.js Pixels Effect</div>
+                </div>
+
+                <div class="gallery-item fade-in-section">
+                    <video controls autoplay muted loop>
+                        <source src="image/Playground image/processing generative art .mov" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="gallery-caption">Processing Generative Art</div>
+                </div>
+
+                <div class="gallery-item fade-in-section">
+                    <video controls autoplay muted loop>
+                        <source src="image/Playground image/Chrismas Tree AR.MOV" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="gallery-caption">Christmas Tree AR</div>
+                </div>
+
+                <div class="gallery-item fade-in-section">
+                    <video controls autoplay muted loop>
+                        <source src="image/Playground image/3D type design.MOV" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="gallery-caption">3D Type Design</div>
+                </div>
+
+                <div class="gallery-item fade-in-section">
+                    <video controls autoplay muted loop>
+                        <source src="image/Playground image/dog app.mov" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="gallery-caption">Dog App</div>
+                </div>
+
+                <!-- Book - Home Pages -->
+                <div class="gallery-item fade-in-section">
+                    <img src="image/Playground image/Book - Home/home book inner_Page_1.jpg" alt="Home Book Inner Page 1">
+                    <div class="gallery-caption">Home Book - Page 1</div>
+                </div>
+
+                <div class="gallery-item fade-in-section">
+                    <img src="image/Playground image/Book - Home/home book inner_Page_2.jpg" alt="Home Book Inner Page 2">
+                    <div class="gallery-caption">Home Book - Page 2</div>
+                </div>
+
+                <div class="gallery-item fade-in-section">
+                    <img src="image/Playground image/Book - Home/home book inner_Page_3.jpg" alt="Home Book Inner Page 3">
+                    <div class="gallery-caption">Home Book - Page 3</div>
+                </div>
+
+                <div class="gallery-item fade-in-section">
+                    <img src="image/Playground image/Book - Home/home book inner_Page_4.jpg" alt="Home Book Inner Page 4">
+                    <div class="gallery-caption">Home Book - Page 4</div>
+                </div>
+
+                <div class="gallery-item fade-in-section">
+                    <img src="image/Playground image/Book - Home/home book inner_Page_5.jpg" alt="Home Book Inner Page 5">
+                    <div class="gallery-caption">Home Book - Page 5</div>
+                </div>
+
+                <div class="gallery-item fade-in-section">
+                    <img src="image/Playground image/Book - Home/home book inner_Page_6.jpg" alt="Home Book Inner Page 6">
+                    <div class="gallery-caption">Home Book - Page 6</div>
+                </div>
+
+                <div class="gallery-item fade-in-section">
+                    <img src="image/Playground image/Book - Home/home book inner_Page_7.jpg" alt="Home Book Inner Page 7">
+                    <div class="gallery-caption">Home Book - Page 7</div>
+                </div>
+
+                <div class="gallery-item fade-in-section">
+                    <img src="image/Playground image/Book - Home/home book inner_Page_8.jpg" alt="Home Book Inner Page 8">
+                    <div class="gallery-caption">Home Book - Page 8</div>
+                </div>
+
+                <div class="gallery-item fade-in-section">
+                    <img src="image/Playground image/Book - Home/home book inner_Page_9.jpg" alt="Home Book Inner Page 9">
+                    <div class="gallery-caption">Home Book - Page 9</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Portfolio Configuration -->
+    <script src="portfolio-config.js"></script>
+    <script src="portfolio-manager.js"></script>
+    <script>
+        // Smooth Scroll Animation System
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Playground page: Initializing with animations...');
+            
+            // Initialize Portfolio Manager like main page
+            const portfolioManager = new PortfolioManager();
+            portfolioManager.init();
+            
+            // Add active highlighting for current project
+            setTimeout(() => {
+                const currentProjectLinks = document.querySelectorAll('.project-link');
+                currentProjectLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.href.includes('playground.html')) {
+                        link.classList.add('active');
+                    }
+                });
+            }, 100);
+
+            // Initialize Smooth Scroll Animations
+            initSmoothScrollAnimations();
+        });
+
+        function initSmoothScrollAnimations() {
+            // Add fade-in-section class to all animatable elements
+            const animatableElements = [
+                '.gallery-title',
+                '.gallery-subtitle',
+                '.gallery-item'
+            ];
+
+            animatableElements.forEach(selector => {
+                const elements = document.querySelectorAll(selector);
+                elements.forEach(element => {
+                    element.classList.add('fade-in-section');
+                });
+            });
+
+            // Create Intersection Observer for smooth reveal animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all fade-in sections
+            const fadeElements = document.querySelectorAll('.fade-in-section');
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+
+            // Immediately show title on load
+            setTimeout(() => {
+                const title = document.querySelector('.gallery-title');
+                if (title) {
+                    title.classList.add('is-visible');
+                }
+            }, 100);
+        }
+
+        // Enhanced smooth scrolling for anchor links
+        document.addEventListener('click', (e) => {
+            const target = e.target.closest('a[href^="#"]');
+            if (target) {
+                e.preventDefault();
+                const targetId = target.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+        });
+    </script>
+</body>
+</html> 

@@ -10,7 +10,7 @@ const portfolioConfig = {
     
     navigation: [
         { label: "Résumé", href: "resume.html" },
-        { label: "Playground", href: "#playground" },
+        { label: "Playground", href: "playground.html" },
         { label: "Ideas", href: "https://medium.com/@kellypear01", external: true }
     ],
     
