@@ -198,8 +198,9 @@
         /* Main Content */
         .main-content {
             margin-left: 250px;
-            padding: var(--apple-spacing-huge) var(--apple-spacing-huge) var(--apple-spacing-huge) 80px;
-            max-width: 1080px;
+            padding: var(--apple-spacing-huge) var(--apple-spacing-xl) var(--apple-spacing-huge) var(--apple-spacing-xl);
+            max-width: none;
+            width: calc(100% - 250px);
         }
 
         /* Gallery Title */
@@ -220,39 +221,100 @@
             letter-spacing: -0.022em;
         }
 
-        /* Gallery Grid */
+        /* Gallery Grid - Pinterest-style Masonry */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-auto-rows: 1px;
             gap: var(--apple-spacing-l);
             margin-bottom: var(--apple-spacing-huge);
+            width: 100%;
+            max-width: none;
+            padding: 0;
         }
 
         .gallery-item {
-            border-radius: var(--apple-radius-medium);
-            overflow: hidden;
             background: var(--apple-background-secondary);
             border: 0.5px solid var(--apple-separator);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            grid-row: span 1;
         }
 
         .gallery-item img,
         .gallery-item video {
             width: 100%;
             height: auto;
+            object-fit: contain;
             display: block;
-            border-radius: var(--apple-radius-medium);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            border-color: var(--apple-blue);
+        }
+
+        .gallery-item img,
+        .gallery-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
             transition: transform 0.3s ease;
         }
 
         .gallery-item:hover img,
         .gallery-item:hover video {
             transform: scale(1.02);
+        }
+
+        .gallery-caption {
+            padding: var(--apple-spacing-m);
+            font-size: 13px;
+            color: var(--apple-text-secondary);
+            font-family: var(--apple-font-caption-1);
+            letter-spacing: -0.016em;
+            background: var(--apple-background-secondary);
+            border-top: 0.5px solid var(--apple-separator);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .gallery-title {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--apple-text-primary);
+            margin-bottom: var(--apple-spacing-xs);
+            font-family: var(--apple-font-subheadline);
+        }
+
+        .gallery-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--apple-spacing-xs);
+            margin-top: var(--apple-spacing-xs);
+        }
+
+        .gallery-tag {
+            font-size: 11px;
+            color: var(--apple-text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 500;
+        }
+
+        .gallery-year {
+            font-size: 11px;
+            color: var(--apple-text-tertiary);
+            font-weight: 400;
+            margin-top: auto;
         }
 
         .gallery-caption {
@@ -269,6 +331,13 @@
         }
 
         /* Responsive Design */
+        @media (max-width: 1024px) {
+            .gallery-grid {
+                column-count: 2;
+                column-gap: var(--apple-spacing-m);
+            }
+        }
+
         @media (max-width: 768px) {
             .sidebar {
                 width: 100%;
@@ -290,12 +359,17 @@
             }
 
             .gallery-grid {
-                grid-template-columns: 1fr;
-                gap: var(--apple-spacing-m);
+                column-count: 1;
+                column-gap: var(--apple-spacing-m);
             }
 
             .container {
                 flex-direction: column;
+            }
+
+            /* Single column - adjust heights for mobile */
+            .gallery-item {
+                height: 300px !important;
             }
         }
 
@@ -376,57 +450,127 @@
                 <!-- Virtual Reality Community Game Design -->
                 <div class="gallery-item fade-in-section">
                     <img src="image/Playground image/Virtual reality community game design.png" alt="Virtual Reality Community Game Design">
-                    <div class="gallery-caption">Virtual Reality Community Game Design</div>
-                </div>
-
-                <!-- Wall and Windows -->
-                <div class="gallery-item fade-in-section">
-                    <img src="image/Playground image/wall and windows.png" alt="Wall and Windows">
-                    <div class="gallery-caption">Wall and Windows</div>
+                    <div class="gallery-caption">
+                        <div class="gallery-title">Virtual Reality Community Game Design</div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Game Design</span>
+                            <span class="gallery-tag">VR</span>
+                        </div>
+                        <div class="gallery-year">2024</div>
+                    </div>
                 </div>
 
                 <!-- Yuan Series -->
                 <div class="gallery-item fade-in-section">
                     <img src="image/Playground image/yuan 1.png" alt="Yuan 1">
-                    <div class="gallery-caption">Yuan 1</div>
+                    <div class="gallery-caption">
+                        <div class="gallery-title">Yuan 1</div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Typography</span>
+                            <span class="gallery-tag">Experimental</span>
+                        </div>
+                        <div class="gallery-year">2024</div>
+                    </div>
                 </div>
 
                 <div class="gallery-item fade-in-section">
                     <img src="image/Playground image/yuan-02.png" alt="Yuan 02">
-                    <div class="gallery-caption">Yuan 02</div>
+                    <div class="gallery-caption">
+                        <div class="gallery-title">Yuan 02</div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Typography</span>
+                            <span class="gallery-tag">Experimental</span>
+                        </div>
+                        <div class="gallery-year">2024</div>
+                    </div>
                 </div>
 
                 <div class="gallery-item fade-in-section">
                     <img src="image/Playground image/yuan-03.png" alt="Yuan 03">
-                    <div class="gallery-caption">Yuan 03</div>
+                    <div class="gallery-caption">
+                        <div class="gallery-title">Yuan 03</div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Typography</span>
+                            <span class="gallery-tag">Experimental</span>
+                        </div>
+                        <div class="gallery-year">2024</div>
+                    </div>
+                </div>
+
+                <!-- Wall and Windows -->
+                <div class="gallery-item fade-in-section">
+                    <img src="image/Playground image/wall and windows.png" alt="Wall and Windows">
+                    <div class="gallery-caption">
+                        <div class="gallery-title">Wall and Windows</div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Photography</span>
+                            <span class="gallery-tag">Architecture</span>
+                        </div>
+                        <div class="gallery-year">2023</div>
+                    </div>
                 </div>
 
                 <!-- Accessible Keyboard -->
                 <div class="gallery-item fade-in-section">
                     <img src="image/Playground image/Accessible keyboard.jpg" alt="Accessible Keyboard">
-                    <div class="gallery-caption">Accessible Keyboard</div>
+                    <div class="gallery-caption">
+                        <div class="gallery-title">Accessible Keyboard</div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Product Design</span>
+                            <span class="gallery-tag">Accessibility</span>
+                        </div>
+                        <div class="gallery-year">2023</div>
+                    </div>
                 </div>
 
                 <div class="gallery-item fade-in-section">
                     <img src="image/Playground image/Accessible keyboard 2.JPG" alt="Accessible Keyboard 2">
-                    <div class="gallery-caption">Accessible Keyboard 2</div>
+                    <div class="gallery-caption">
+                        <div class="gallery-title">Accessible Keyboard 2</div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Product Design</span>
+                            <span class="gallery-tag">Accessibility</span>
+                        </div>
+                        <div class="gallery-year">2023</div>
+                    </div>
                 </div>
 
                 <!-- Running Pages -->
                 <div class="gallery-item fade-in-section">
                     <img src="image/Playground image/RUNNING_Page_03.jpg" alt="Running Page 03">
-                    <div class="gallery-caption">Running Page 03</div>
+                    <div class="gallery-caption">
+                        <div class="gallery-title">Running Page 03</div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Editorial</span>
+                            <span class="gallery-tag">Motion</span>
+                        </div>
+                        <div class="gallery-year">2023</div>
+                    </div>
                 </div>
 
                 <div class="gallery-item fade-in-section">
                     <img src="image/Playground image/RUNNING_Page_05.jpg" alt="Running Page 05">
-                    <div class="gallery-caption">Running Page 05</div>
+                    <div class="gallery-caption">
+                        <div class="gallery-title">Running Page 05</div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Editorial</span>
+                            <span class="gallery-tag">Motion</span>
+                        </div>
+                        <div class="gallery-year">2023</div>
+                    </div>
                 </div>
 
                 <!-- Book Mark -->
                 <div class="gallery-item fade-in-section">
                     <img src="image/Playground image/book mark.png" alt="Book Mark">
-                    <div class="gallery-caption">Book Mark</div>
+                    <div class="gallery-caption">
+                        <div class="gallery-title">Book Mark</div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Product Design</span>
+                            <span class="gallery-tag">Book Design</span>
+                        </div>
+                        <div class="gallery-year">2023</div>
+                    </div>
                 </div>
 
                 <!-- Videos -->
@@ -435,7 +579,14 @@
                         <source src="image/Playground image/p5js pixels effect.mov" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
-                    <div class="gallery-caption">P5.js Pixels Effect</div>
+                    <div class="gallery-caption">
+                        <div class="gallery-title">P5.js Pixels Effect</div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Generative Art</span>
+                            <span class="gallery-tag">Coding</span>
+                        </div>
+                        <div class="gallery-year">2024</div>
+                    </div>
                 </div>
 
                 <div class="gallery-item fade-in-section">
@@ -443,7 +594,14 @@
                         <source src="image/Playground image/processing generative art .mov" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
-                    <div class="gallery-caption">Processing Generative Art</div>
+                    <div class="gallery-caption">
+                        <div class="gallery-title">Processing Generative Art</div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Generative Art</span>
+                            <span class="gallery-tag">Coding</span>
+                        </div>
+                        <div class="gallery-year">2024</div>
+                    </div>
                 </div>
 
                 <div class="gallery-item fade-in-section">
@@ -451,7 +609,14 @@
                         <source src="image/Playground image/Chrismas Tree AR.MOV" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
-                    <div class="gallery-caption">Christmas Tree AR</div>
+                    <div class="gallery-caption">
+                        <div class="gallery-title">Christmas Tree AR</div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">AR</span>
+                            <span class="gallery-tag">Interactive</span>
+                        </div>
+                        <div class="gallery-year">2023</div>
+                    </div>
                 </div>
 
                 <div class="gallery-item fade-in-section">
@@ -459,7 +624,14 @@
                         <source src="image/Playground image/3D type design.MOV" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
-                    <div class="gallery-caption">3D Type Design</div>
+                    <div class="gallery-caption">
+                        <div class="gallery-title">3D Type Design</div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">3D</span>
+                            <span class="gallery-tag">Typography</span>
+                        </div>
+                        <div class="gallery-year">2024</div>
+                    </div>
                 </div>
 
                 <div class="gallery-item fade-in-section">
@@ -467,53 +639,123 @@
                         <source src="image/Playground image/dog app.mov" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
-                    <div class="gallery-caption">Dog App</div>
+                    <div class="gallery-caption">
+                        <div class="gallery-title">Dog App</div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">App Design</span>
+                            <span class="gallery-tag">Interactive</span>
+                        </div>
+                        <div class="gallery-year">2023</div>
+                    </div>
                 </div>
 
                 <!-- Book - Home Pages -->
                 <div class="gallery-item fade-in-section">
                     <img src="image/Playground image/Book - Home/home book inner_Page_1.jpg" alt="Home Book Inner Page 1">
-                    <div class="gallery-caption">Home Book - Page 1</div>
+                    <div class="gallery-caption">
+                        <div class="gallery-title">Home Book - Page 1</div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Book Design</span>
+                            <span class="gallery-tag">Editorial</span>
+                        </div>
+                        <div class="gallery-year">2023</div>
+                    </div>
                 </div>
 
                 <div class="gallery-item fade-in-section">
                     <img src="image/Playground image/Book - Home/home book inner_Page_2.jpg" alt="Home Book Inner Page 2">
-                    <div class="gallery-caption">Home Book - Page 2</div>
+                    <div class="gallery-caption">
+                        <div class="gallery-title">Home Book - Page 2</div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Book Design</span>
+                            <span class="gallery-tag">Editorial</span>
+                        </div>
+                        <div class="gallery-year">2023</div>
+                    </div>
                 </div>
 
                 <div class="gallery-item fade-in-section">
                     <img src="image/Playground image/Book - Home/home book inner_Page_3.jpg" alt="Home Book Inner Page 3">
-                    <div class="gallery-caption">Home Book - Page 3</div>
+                    <div class="gallery-caption">
+                        <div class="gallery-title">Home Book - Page 3</div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Book Design</span>
+                            <span class="gallery-tag">Editorial</span>
+                        </div>
+                        <div class="gallery-year">2023</div>
+                    </div>
                 </div>
 
                 <div class="gallery-item fade-in-section">
                     <img src="image/Playground image/Book - Home/home book inner_Page_4.jpg" alt="Home Book Inner Page 4">
-                    <div class="gallery-caption">Home Book - Page 4</div>
+                    <div class="gallery-caption">
+                        <div class="gallery-title">Home Book - Page 4</div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Book Design</span>
+                            <span class="gallery-tag">Editorial</span>
+                        </div>
+                        <div class="gallery-year">2023</div>
+                    </div>
                 </div>
 
                 <div class="gallery-item fade-in-section">
                     <img src="image/Playground image/Book - Home/home book inner_Page_5.jpg" alt="Home Book Inner Page 5">
-                    <div class="gallery-caption">Home Book - Page 5</div>
+                    <div class="gallery-caption">
+                        <div class="gallery-title">Home Book - Page 5</div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Book Design</span>
+                            <span class="gallery-tag">Editorial</span>
+                        </div>
+                        <div class="gallery-year">2023</div>
+                    </div>
                 </div>
 
                 <div class="gallery-item fade-in-section">
                     <img src="image/Playground image/Book - Home/home book inner_Page_6.jpg" alt="Home Book Inner Page 6">
-                    <div class="gallery-caption">Home Book - Page 6</div>
+                    <div class="gallery-caption">
+                        <div class="gallery-title">Home Book - Page 6</div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Book Design</span>
+                            <span class="gallery-tag">Editorial</span>
+                        </div>
+                        <div class="gallery-year">2023</div>
+                    </div>
                 </div>
 
                 <div class="gallery-item fade-in-section">
                     <img src="image/Playground image/Book - Home/home book inner_Page_7.jpg" alt="Home Book Inner Page 7">
-                    <div class="gallery-caption">Home Book - Page 7</div>
+                    <div class="gallery-caption">
+                        <div class="gallery-title">Home Book - Page 7</div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Book Design</span>
+                            <span class="gallery-tag">Editorial</span>
+                        </div>
+                        <div class="gallery-year">2023</div>
+                    </div>
                 </div>
 
                 <div class="gallery-item fade-in-section">
                     <img src="image/Playground image/Book - Home/home book inner_Page_8.jpg" alt="Home Book Inner Page 8">
-                    <div class="gallery-caption">Home Book - Page 8</div>
+                    <div class="gallery-caption">
+                        <div class="gallery-title">Home Book - Page 8</div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Book Design</span>
+                            <span class="gallery-tag">Editorial</span>
+                        </div>
+                        <div class="gallery-year">2023</div>
+                    </div>
                 </div>
 
                 <div class="gallery-item fade-in-section">
                     <img src="image/Playground image/Book - Home/home book inner_Page_9.jpg" alt="Home Book Inner Page 9">
-                    <div class="gallery-caption">Home Book - Page 9</div>
+                    <div class="gallery-caption">
+                        <div class="gallery-title">Home Book - Page 9</div>
+                        <div class="gallery-tags">
+                            <span class="gallery-tag">Book Design</span>
+                            <span class="gallery-tag">Editorial</span>
+                        </div>
+                        <div class="gallery-year">2023</div>
+                    </div>
                 </div>
             </div>
         </main>
@@ -544,6 +786,9 @@
 
             // Initialize Smooth Scroll Animations
             initSmoothScrollAnimations();
+            
+            // Initialize Masonry Layout
+            initMasonryLayout();
         });
 
         function initSmoothScrollAnimations() {
@@ -606,6 +851,97 @@
                 }
             }
         });
+
+        // Pinterest-style masonry layout
+        function initMasonryLayout() {
+            const galleryGrid = document.querySelector('.gallery-grid');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            // Wait for all images to load
+            let loadedImages = 0;
+            const totalImages = galleryItems.length;
+            
+            function calculateLayout() {
+                const grid = galleryGrid;
+                const items = Array.from(galleryItems);
+                
+                // Reset grid row spans
+                items.forEach(item => {
+                    item.style.gridRow = 'span 1';
+                });
+                
+                // Calculate heights and assign row spans
+                items.forEach(item => {
+                    const img = item.querySelector('img');
+                    const video = item.querySelector('video');
+                    
+                    if (img && img.complete) {
+                        const aspectRatio = img.naturalHeight / img.naturalWidth;
+                        const gridWidth = item.offsetWidth;
+                        const height = gridWidth * aspectRatio;
+                        const rowSpan = Math.ceil(height / 1); // 1px grid rows
+                        item.style.gridRow = `span ${rowSpan}`;
+                    } else if (video && video.readyState >= 2) {
+                        const aspectRatio = video.videoHeight / video.videoWidth;
+                        const gridWidth = item.offsetWidth;
+                        const height = gridWidth * aspectRatio;
+                        const rowSpan = Math.ceil(height / 1);
+                        item.style.gridRow = `span ${rowSpan}`;
+                    } else {
+                        // Default height for items without images
+                        item.style.gridRow = 'span 300';
+                    }
+                });
+            }
+            
+            // Handle image load events
+            galleryItems.forEach(item => {
+                const img = item.querySelector('img');
+                const video = item.querySelector('video');
+                
+                if (img) {
+                    if (img.complete) {
+                        loadedImages++;
+                        if (loadedImages === totalImages) {
+                            setTimeout(calculateLayout, 100);
+                        }
+                    } else {
+                        img.addEventListener('load', () => {
+                            loadedImages++;
+                            if (loadedImages === totalImages) {
+                                setTimeout(calculateLayout, 100);
+                            }
+                        });
+                    }
+                } else if (video) {
+                    if (video.readyState >= 2) {
+                        loadedImages++;
+                        if (loadedImages === totalImages) {
+                            setTimeout(calculateLayout, 100);
+                        }
+                    } else {
+                        video.addEventListener('loadeddata', () => {
+                            loadedImages++;
+                            if (loadedImages === totalImages) {
+                                setTimeout(calculateLayout, 100);
+                            }
+                        });
+                    }
+                } else {
+                    loadedImages++;
+                    if (loadedImages === totalImages) {
+                        setTimeout(calculateLayout, 100);
+                    }
+                }
+            });
+            
+            // Recalculate on window resize
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(calculateLayout, 250);
+            });
+        }
     </script>
 </body>
 </html> 

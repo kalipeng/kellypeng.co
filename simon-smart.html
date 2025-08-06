@@ -768,6 +768,25 @@
             .container {
                 flex-direction: column;
             }
+
+            /* Feature items responsive layout */
+            .feature-item {
+                flex-direction: column !important;
+                gap: var(--apple-spacing-l) !important;
+            }
+
+            .feature-item > div {
+                max-width: 100% !important;
+            }
+
+            .feature-item h3 {
+                font-size: 20px !important;
+                margin-bottom: var(--apple-spacing-s) !important;
+            }
+
+            .feature-item p {
+                font-size: 15px !important;
+            }
         }
 
         /* Scroll Down Indicator */
@@ -1098,7 +1117,7 @@
         <main class="main-content">
         <!-- Hero Image at Top -->
         <div class="hero-image fade-in-section">
-            <img src="image/Simonmainpagebanner.jpg" alt="Simon Smart Project Hero Image">
+            <img src="image/Simonmainpagebanner.jpg" alt="Simon Smart Project Hero Image" loading="lazy">
             <!-- Scroll Down Indicator -->
             <div class="scroll-indicator">
                 <div class="scroll-arrow">
@@ -1290,12 +1309,49 @@
         <!-- Key Features -->
         <section class="content-section fade-in-section" id="features">
             <h2 class="section-title">Key Features</h2>
-            <div class="section-content">
-                <p>• <strong>Scene-Based Automation:</strong> Rise, Leave, Return, and Sleep presets</p>
-                <p>• <strong>Animated Illustrations:</strong> Visual feedback for user actions</p>
-                <p>• <strong>Simplified Device Management:</strong> Streamlined control interface</p>
-                <p>• <strong>Customizable Routines:</strong> Personalized automation sequences</p>
-                <p>• <strong>Intuitive Navigation:</strong> Reduced learning curve for new users</p>
+            
+            <!-- Scene-Based Automation -->
+            <div class="feature-item fade-in-section" style="display: flex; align-items: center; gap: var(--apple-spacing-huge); margin-bottom: var(--apple-spacing-huge);">
+                <div style="flex: 1; max-width: 50%;">
+                    <img src="image/simon /Under design process/Scene-Based Automation.png" alt="Scene-Based Automation Interface" style="width: 100%; height: auto; border-radius: var(--apple-radius-medium);">
+                </div>
+                <div style="flex: 1; max-width: 50%;">
+                    <h3 style="font-size: 24px; font-weight: 600; color: var(--apple-text-primary); margin-bottom: var(--apple-spacing-m); font-family: var(--apple-font-headline);">Scene-Based Automation</h3>
+                    <p style="font-size: 17px; line-height: 1.47059; color: var(--apple-text-secondary); font-family: var(--apple-font-body);">Rise, Leave, Return, and Sleep presets that allow users to manage multiple devices simultaneously through preset automation sequences.</p>
+                </div>
+            </div>
+
+            <!-- Simplified Device Management -->
+            <div class="feature-item fade-in-section" style="display: flex; align-items: center; gap: var(--apple-spacing-huge); margin-bottom: var(--apple-spacing-huge); flex-direction: row-reverse;">
+                <div style="flex: 1; max-width: 50%;">
+                    <img src="image/simon /Under design process/Simplified Device Management.png" alt="Simplified Device Management Interface" style="width: 100%; height: auto; border-radius: var(--apple-radius-medium);">
+                </div>
+                <div style="flex: 1; max-width: 50%;">
+                    <h3 style="font-size: 24px; font-weight: 600; color: var(--apple-text-primary); margin-bottom: var(--apple-spacing-m); font-family: var(--apple-font-headline);">Simplified Device Management</h3>
+                    <p style="font-size: 17px; line-height: 1.47059; color: var(--apple-text-secondary); font-family: var(--apple-font-body);">Streamlined control interface that makes managing individual devices intuitive and accessible.</p>
+                </div>
+            </div>
+
+            <!-- Customizable Routines -->
+            <div class="feature-item fade-in-section" style="display: flex; align-items: center; gap: var(--apple-spacing-huge); margin-bottom: var(--apple-spacing-huge);">
+                <div style="flex: 1; max-width: 50%;">
+                    <img src="image/simon /Under design process/Customizable Routines.png" alt="Customizable Routines Interface" style="width: 100%; height: auto; border-radius: var(--apple-radius-medium);">
+                </div>
+                <div style="flex: 1; max-width: 50%;">
+                    <h3 style="font-size: 24px; font-weight: 600; color: var(--apple-text-primary); margin-bottom: var(--apple-spacing-m); font-family: var(--apple-font-headline);">Customizable Routines</h3>
+                    <p style="font-size: 17px; line-height: 1.47059; color: var(--apple-text-secondary); font-family: var(--apple-font-body);">Personalized automation sequences that adapt to individual user preferences and daily patterns.</p>
+                </div>
+            </div>
+
+            <!-- Intuitive Navigation -->
+            <div class="feature-item fade-in-section" style="display: flex; align-items: center; gap: var(--apple-spacing-huge); margin-bottom: var(--apple-spacing-huge); flex-direction: row-reverse;">
+                <div style="flex: 1; max-width: 50%;">
+                    <img src="image/simon /Under design process/Intuitive Navigation.png" alt="Intuitive Navigation Interface" style="width: 100%; height: auto; border-radius: var(--apple-radius-medium);">
+                </div>
+                <div style="flex: 1; max-width: 50%;">
+                    <h3 style="font-size: 24px; font-weight: 600; color: var(--apple-text-primary); margin-bottom: var(--apple-spacing-m); font-family: var(--apple-font-headline);">Intuitive Navigation</h3>
+                    <p style="font-size: 17px; line-height: 1.47059; color: var(--apple-text-secondary); font-family: var(--apple-font-body);">Reduced learning curve for new users through clear visual hierarchy and familiar interaction patterns.</p>
+                </div>
             </div>
         </section>
 
