@@ -66,24 +66,27 @@ class PortfolioManager {
     const projectsContainer = document.querySelector('.projects-grid');
     if (!projectsContainer) return;
 
-    const projectsHTML = this.config.projects.map(project => 
-      this.createProjectCard(project)
+    const projectsHTML = this.config.projects.map((project, index) => 
+      this.createProjectCard(project, index)
     ).join('');
 
     projectsContainer.innerHTML = projectsHTML;
   }
 
-  createProjectCard(project) {
-    const originalSrc = project.image;
-    const avifSrc = originalSrc.replace(/\.[^/.]+$/, '.avif');
-    const webpSrc = originalSrc.replace(/\.[^/.]+$/, '.webp');
+  createProjectCard(project, index) {
+    const originalSrc = project.image;                 // e.g. image/foo.jpg
+    const base = originalSrc.replace(/\.[^/.]+$/, '');
+    const isLCP = index === 0;
+    const loading = isLCP ? 'eager' : 'lazy';
+    const fetchPriority = isLCP ? 'high' : 'low';
+    const sizes = '(max-width: 768px) 90vw, 600px';
     return `
       <div class="project-card" onclick="window.location.href='${project.link}'">
         <div class="project-visual">
           <picture>
-            <source srcset="${avifSrc}" type="image/avif">
-            <source srcset="${webpSrc}" type="image/webp">
-            <img src="${originalSrc}" alt="${project.title}" loading="eager" onerror="this.style.display='none'">
+            <source type="image/avif" srcset="${base}-1200.avif 1200w, ${base}-1920.avif 1920w" sizes="${sizes}">
+            <source type="image/webp" srcset="${base}-1200.webp 1200w, ${base}-1920.webp 1920w" sizes="${sizes}">
+            <img src="${originalSrc}" alt="${project.title}" loading="${loading}" decoding="async" fetchpriority="${fetchPriority}" width="1200" height="675" style="aspect-ratio: 16/9; width: 100%; height: auto;">
           </picture>
         </div>
         <div class="project-info">
