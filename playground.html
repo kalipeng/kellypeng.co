@@ -221,12 +221,10 @@
             letter-spacing: -0.022em;
         }
 
-        /* Gallery Grid - Pinterest-style Masonry */
+        /* Gallery Grid - Masonry Layout */
         .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            grid-auto-rows: 1px;
-            gap: var(--apple-spacing-l);
+            column-count: 3;
+            column-gap: var(--apple-spacing-xl);
             margin-bottom: var(--apple-spacing-huge);
             width: 100%;
             max-width: none;
@@ -241,7 +239,10 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            grid-row: span 1;
+            break-inside: avoid;
+            margin-bottom: var(--apple-spacing-xl);
+            page-break-inside: avoid;
+            -webkit-column-break-inside: avoid;
         }
 
         .gallery-item img,
@@ -252,6 +253,37 @@
             display: block;
             transition: transform 0.3s ease;
         }
+
+        /* Special focus items - span multiple columns */
+        .gallery-item[data-focus="true"] {
+            column-span: all;
+            break-inside: avoid;
+            margin-bottom: var(--apple-spacing-xl);
+        }
+
+        /* Specific focus items */
+        .gallery-item[data-project="dog-app"] {
+            /* Span all columns - make it bigger */
+            column-span: all;
+            -webkit-column-span: all;
+            break-inside: avoid;
+            margin-bottom: var(--apple-spacing-xl);
+            border: 1px solid var(--apple-separator);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item[data-project="dog-app"]:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Additional focus items */
+        .gallery-item[data-project="vr-game"] {
+            /* Normal size - no special styling */
+            border: 0.5px solid var(--apple-separator);
+        }
+
+
 
         .gallery-item:hover {
             transform: translateY(-4px);
@@ -336,6 +368,16 @@
                 column-count: 2;
                 column-gap: var(--apple-spacing-m);
             }
+            
+            .gallery-item[data-project="dog-app"] {
+                column-span: all;
+                -webkit-column-span: all;
+            }
+            
+            .gallery-item[data-project="vr-game"] {
+                column-span: 1;
+                -webkit-column-span: 1;
+            }
         }
 
         @media (max-width: 768px) {
@@ -362,14 +404,15 @@
                 column-count: 1;
                 column-gap: var(--apple-spacing-m);
             }
+            
+            .gallery-item[data-project="dog-app"],
+            .gallery-item[data-project="vr-game"] {
+                column-span: 1;
+                -webkit-column-span: 1;
+            }
 
             .container {
                 flex-direction: column;
-            }
-
-            /* Single column - adjust heights for mobile */
-            .gallery-item {
-                height: 300px !important;
             }
         }
 
@@ -448,8 +491,8 @@
             
             <div class="gallery-grid">
                 <!-- Virtual Reality Community Game Design -->
-                <div class="gallery-item fade-in-section">
-                    <img src="image/Playground image/Virtual reality community game design.png" alt="Virtual Reality Community Game Design">
+                <div class="gallery-item fade-in-section" data-project="vr-game">
+                    <img src="image/Playground image/Virtual reality community game design.png" alt="Virtual Reality Community Game Design" loading="lazy">
                     <div class="gallery-caption">
                         <div class="gallery-title">Virtual Reality Community Game Design</div>
                         <div class="gallery-tags">
@@ -460,46 +503,11 @@
                     </div>
                 </div>
 
-                <!-- Yuan Series -->
-                <div class="gallery-item fade-in-section">
-                    <img src="image/Playground image/yuan 1.png" alt="Yuan 1">
-                    <div class="gallery-caption">
-                        <div class="gallery-title">Yuan 1</div>
-                        <div class="gallery-tags">
-                            <span class="gallery-tag">Typography</span>
-                            <span class="gallery-tag">Experimental</span>
-                        </div>
-                        <div class="gallery-year">2024</div>
-                    </div>
-                </div>
 
-                <div class="gallery-item fade-in-section">
-                    <img src="image/Playground image/yuan-02.png" alt="Yuan 02">
-                    <div class="gallery-caption">
-                        <div class="gallery-title">Yuan 02</div>
-                        <div class="gallery-tags">
-                            <span class="gallery-tag">Typography</span>
-                            <span class="gallery-tag">Experimental</span>
-                        </div>
-                        <div class="gallery-year">2024</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item fade-in-section">
-                    <img src="image/Playground image/yuan-03.png" alt="Yuan 03">
-                    <div class="gallery-caption">
-                        <div class="gallery-title">Yuan 03</div>
-                        <div class="gallery-tags">
-                            <span class="gallery-tag">Typography</span>
-                            <span class="gallery-tag">Experimental</span>
-                        </div>
-                        <div class="gallery-year">2024</div>
-                    </div>
-                </div>
 
                 <!-- Wall and Windows -->
                 <div class="gallery-item fade-in-section">
-                    <img src="image/Playground image/wall and windows.png" alt="Wall and Windows">
+                    <img src="image/Playground image/wall and windows.png" alt="Wall and Windows" loading="lazy">
                     <div class="gallery-caption">
                         <div class="gallery-title">Wall and Windows</div>
                         <div class="gallery-tags">
@@ -512,7 +520,7 @@
 
                 <!-- Accessible Keyboard -->
                 <div class="gallery-item fade-in-section">
-                    <img src="image/Playground image/Accessible keyboard.jpg" alt="Accessible Keyboard">
+                    <img src="image/Playground image/Accessible keyboard.jpg" alt="Accessible Keyboard" loading="lazy">
                     <div class="gallery-caption">
                         <div class="gallery-title">Accessible Keyboard</div>
                         <div class="gallery-tags">
@@ -524,7 +532,7 @@
                 </div>
 
                 <div class="gallery-item fade-in-section">
-                    <img src="image/Playground image/Accessible keyboard 2.JPG" alt="Accessible Keyboard 2">
+                    <img src="image/Playground image/Accessible keyboard 2.JPG" alt="Accessible Keyboard 2" loading="lazy">
                     <div class="gallery-caption">
                         <div class="gallery-title">Accessible Keyboard 2</div>
                         <div class="gallery-tags">
@@ -537,7 +545,7 @@
 
                 <!-- Running Pages -->
                 <div class="gallery-item fade-in-section">
-                    <img src="image/Playground image/RUNNING_Page_03.jpg" alt="Running Page 03">
+                    <img src="image/Playground image/RUNNING_Page_03.jpg" alt="Running Page 03" loading="lazy">
                     <div class="gallery-caption">
                         <div class="gallery-title">Running Page 03</div>
                         <div class="gallery-tags">
@@ -549,7 +557,7 @@
                 </div>
 
                 <div class="gallery-item fade-in-section">
-                    <img src="image/Playground image/RUNNING_Page_05.jpg" alt="Running Page 05">
+                    <img src="image/Playground image/RUNNING_Page_05.jpg" alt="Running Page 05" loading="lazy">
                     <div class="gallery-caption">
                         <div class="gallery-title">Running Page 05</div>
                         <div class="gallery-tags">
@@ -562,7 +570,7 @@
 
                 <!-- Book Mark -->
                 <div class="gallery-item fade-in-section">
-                    <img src="image/Playground image/book mark.png" alt="Book Mark">
+                    <img src="image/Playground image/book mark.png" alt="Book Mark" loading="lazy">
                     <div class="gallery-caption">
                         <div class="gallery-title">Book Mark</div>
                         <div class="gallery-tags">
@@ -575,7 +583,7 @@
 
                 <!-- Videos -->
                 <div class="gallery-item fade-in-section">
-                    <video controls autoplay muted loop>
+                    <video controls autoplay muted loop preload="none">
                         <source src="image/Playground image/p5js pixels effect.mov" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -590,7 +598,7 @@
                 </div>
 
                 <div class="gallery-item fade-in-section">
-                    <video controls autoplay muted loop>
+                    <video controls autoplay muted loop preload="none">
                         <source src="image/Playground image/processing generative art .mov" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -605,7 +613,7 @@
                 </div>
 
                 <div class="gallery-item fade-in-section">
-                    <video controls autoplay muted loop>
+                    <video controls autoplay muted loop preload="none">
                         <source src="image/Playground image/Chrismas Tree AR.MOV" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -620,7 +628,7 @@
                 </div>
 
                 <div class="gallery-item fade-in-section">
-                    <video controls autoplay muted loop>
+                    <video controls autoplay muted loop preload="none">
                         <source src="image/Playground image/3D type design.MOV" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -634,8 +642,8 @@
                     </div>
                 </div>
 
-                <div class="gallery-item fade-in-section">
-                    <video controls autoplay muted loop>
+                <div class="gallery-item fade-in-section" data-project="dog-app">
+                    <video controls autoplay muted loop preload="none">
                         <source src="image/Playground image/dog app.mov" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -649,114 +657,7 @@
                     </div>
                 </div>
 
-                <!-- Book - Home Pages -->
-                <div class="gallery-item fade-in-section">
-                    <img src="image/Playground image/Book - Home/home book inner_Page_1.jpg" alt="Home Book Inner Page 1">
-                    <div class="gallery-caption">
-                        <div class="gallery-title">Home Book - Page 1</div>
-                        <div class="gallery-tags">
-                            <span class="gallery-tag">Book Design</span>
-                            <span class="gallery-tag">Editorial</span>
-                        </div>
-                        <div class="gallery-year">2023</div>
-                    </div>
-                </div>
 
-                <div class="gallery-item fade-in-section">
-                    <img src="image/Playground image/Book - Home/home book inner_Page_2.jpg" alt="Home Book Inner Page 2">
-                    <div class="gallery-caption">
-                        <div class="gallery-title">Home Book - Page 2</div>
-                        <div class="gallery-tags">
-                            <span class="gallery-tag">Book Design</span>
-                            <span class="gallery-tag">Editorial</span>
-                        </div>
-                        <div class="gallery-year">2023</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item fade-in-section">
-                    <img src="image/Playground image/Book - Home/home book inner_Page_3.jpg" alt="Home Book Inner Page 3">
-                    <div class="gallery-caption">
-                        <div class="gallery-title">Home Book - Page 3</div>
-                        <div class="gallery-tags">
-                            <span class="gallery-tag">Book Design</span>
-                            <span class="gallery-tag">Editorial</span>
-                        </div>
-                        <div class="gallery-year">2023</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item fade-in-section">
-                    <img src="image/Playground image/Book - Home/home book inner_Page_4.jpg" alt="Home Book Inner Page 4">
-                    <div class="gallery-caption">
-                        <div class="gallery-title">Home Book - Page 4</div>
-                        <div class="gallery-tags">
-                            <span class="gallery-tag">Book Design</span>
-                            <span class="gallery-tag">Editorial</span>
-                        </div>
-                        <div class="gallery-year">2023</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item fade-in-section">
-                    <img src="image/Playground image/Book - Home/home book inner_Page_5.jpg" alt="Home Book Inner Page 5">
-                    <div class="gallery-caption">
-                        <div class="gallery-title">Home Book - Page 5</div>
-                        <div class="gallery-tags">
-                            <span class="gallery-tag">Book Design</span>
-                            <span class="gallery-tag">Editorial</span>
-                        </div>
-                        <div class="gallery-year">2023</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item fade-in-section">
-                    <img src="image/Playground image/Book - Home/home book inner_Page_6.jpg" alt="Home Book Inner Page 6">
-                    <div class="gallery-caption">
-                        <div class="gallery-title">Home Book - Page 6</div>
-                        <div class="gallery-tags">
-                            <span class="gallery-tag">Book Design</span>
-                            <span class="gallery-tag">Editorial</span>
-                        </div>
-                        <div class="gallery-year">2023</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item fade-in-section">
-                    <img src="image/Playground image/Book - Home/home book inner_Page_7.jpg" alt="Home Book Inner Page 7">
-                    <div class="gallery-caption">
-                        <div class="gallery-title">Home Book - Page 7</div>
-                        <div class="gallery-tags">
-                            <span class="gallery-tag">Book Design</span>
-                            <span class="gallery-tag">Editorial</span>
-                        </div>
-                        <div class="gallery-year">2023</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item fade-in-section">
-                    <img src="image/Playground image/Book - Home/home book inner_Page_8.jpg" alt="Home Book Inner Page 8">
-                    <div class="gallery-caption">
-                        <div class="gallery-title">Home Book - Page 8</div>
-                        <div class="gallery-tags">
-                            <span class="gallery-tag">Book Design</span>
-                            <span class="gallery-tag">Editorial</span>
-                        </div>
-                        <div class="gallery-year">2023</div>
-                    </div>
-                </div>
-
-                <div class="gallery-item fade-in-section">
-                    <img src="image/Playground image/Book - Home/home book inner_Page_9.jpg" alt="Home Book Inner Page 9">
-                    <div class="gallery-caption">
-                        <div class="gallery-title">Home Book - Page 9</div>
-                        <div class="gallery-tags">
-                            <span class="gallery-tag">Book Design</span>
-                            <span class="gallery-tag">Editorial</span>
-                        </div>
-                        <div class="gallery-year">2023</div>
-                    </div>
-                </div>
             </div>
         </main>
     </div>
@@ -852,94 +753,14 @@
             }
         });
 
-        // Pinterest-style masonry layout
+        // Simple masonry layout initialization
         function initMasonryLayout() {
-            const galleryGrid = document.querySelector('.gallery-grid');
             const galleryItems = document.querySelectorAll('.gallery-item');
             
-            // Wait for all images to load
-            let loadedImages = 0;
-            const totalImages = galleryItems.length;
-            
-            function calculateLayout() {
-                const grid = galleryGrid;
-                const items = Array.from(galleryItems);
-                
-                // Reset grid row spans
-                items.forEach(item => {
-                    item.style.gridRow = 'span 1';
-                });
-                
-                // Calculate heights and assign row spans
-                items.forEach(item => {
-                    const img = item.querySelector('img');
-                    const video = item.querySelector('video');
-                    
-                    if (img && img.complete) {
-                        const aspectRatio = img.naturalHeight / img.naturalWidth;
-                        const gridWidth = item.offsetWidth;
-                        const height = gridWidth * aspectRatio;
-                        const rowSpan = Math.ceil(height / 1); // 1px grid rows
-                        item.style.gridRow = `span ${rowSpan}`;
-                    } else if (video && video.readyState >= 2) {
-                        const aspectRatio = video.videoHeight / video.videoWidth;
-                        const gridWidth = item.offsetWidth;
-                        const height = gridWidth * aspectRatio;
-                        const rowSpan = Math.ceil(height / 1);
-                        item.style.gridRow = `span ${rowSpan}`;
-                    } else {
-                        // Default height for items without images
-                        item.style.gridRow = 'span 300';
-                    }
-                });
-            }
-            
-            // Handle image load events
-            galleryItems.forEach(item => {
-                const img = item.querySelector('img');
-                const video = item.querySelector('video');
-                
-                if (img) {
-                    if (img.complete) {
-                        loadedImages++;
-                        if (loadedImages === totalImages) {
-                            setTimeout(calculateLayout, 100);
-                        }
-                    } else {
-                        img.addEventListener('load', () => {
-                            loadedImages++;
-                            if (loadedImages === totalImages) {
-                                setTimeout(calculateLayout, 100);
-                            }
-                        });
-                    }
-                } else if (video) {
-                    if (video.readyState >= 2) {
-                        loadedImages++;
-                        if (loadedImages === totalImages) {
-                            setTimeout(calculateLayout, 100);
-                        }
-                    } else {
-                        video.addEventListener('loadeddata', () => {
-                            loadedImages++;
-                            if (loadedImages === totalImages) {
-                                setTimeout(calculateLayout, 100);
-                            }
-                        });
-                    }
-                } else {
-                    loadedImages++;
-                    if (loadedImages === totalImages) {
-                        setTimeout(calculateLayout, 100);
-                    }
-                }
-            });
-            
-            // Recalculate on window resize
-            let resizeTimeout;
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimeout);
-                resizeTimeout = setTimeout(calculateLayout, 250);
+            // Add fade-in animation to items
+            galleryItems.forEach((item, index) => {
+                item.style.animationDelay = `${index * 0.1}s`;
+                item.classList.add('fade-in-section');
             });
         }
     </script>
