@@ -5,4 +5,14 @@
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 /*.map
-  Cache-Control: no-store 
+  Cache-Control: no-store
+
+# Hero images: shorter cache to avoid staleness
+/image/Simonmainpagebanner.webp
+  Cache-Control: public, max-age=604800
+/image/Simonmainpagebanner.jpg
+  Cache-Control: public, max-age=604800
+/image/Tmobilemainpage.webp
+  Cache-Control: public, max-age=604800
+/image/Tmobilemainpage.png
+  Cache-Control: public, max-age=604800 

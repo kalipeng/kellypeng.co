@@ -77,7 +77,10 @@ class PortfolioManager {
     return `
       <div class="project-card" onclick="window.location.href='${project.link}'">
         <div class="project-visual">
-          <img src="${project.image}" alt="${project.title}" onerror="this.style.display='none'">
+          <picture>
+            <source srcset="${project.imageWebp || ''}" type="image/webp">
+            <img src="${project.image}" alt="${project.title}" onerror="this.style.display='none'">
+          </picture>
         </div>
         <div class="project-info">
           <div class="project-category">${project.category}</div>
