@@ -74,12 +74,16 @@ class PortfolioManager {
   }
 
   createProjectCard(project) {
+    const originalSrc = project.image;
+    const avifSrc = originalSrc.replace(/\.[^/.]+$/, '.avif');
+    const webpSrc = originalSrc.replace(/\.[^/.]+$/, '.webp');
     return `
       <div class="project-card" onclick="window.location.href='${project.link}'">
         <div class="project-visual">
           <picture>
-            <source srcset="${project.imageWebp || ''}" type="image/webp">
-            <img src="${project.image}" alt="${project.title}" onerror="this.style.display='none'">
+            <source srcset="${avifSrc}" type="image/avif">
+            <source srcset="${webpSrc}" type="image/webp">
+            <img src="${originalSrc}" alt="${project.title}" loading="eager" onerror="this.style.display='none'">
           </picture>
         </div>
         <div class="project-info">
