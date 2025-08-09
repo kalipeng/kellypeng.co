@@ -1117,7 +1117,10 @@
         <main class="main-content">
         <!-- Hero Image at Top -->
         <div class="hero-image fade-in-section">
-            <img src="image/Simonmainpagebanner.jpg" alt="Simon Smart Project Hero Image" loading="lazy">
+            <picture>
+                <source srcset="image/Simonmainpagebanner.webp" type="image/webp">
+                <img src="image/Simonmainpagebanner.jpg" alt="Simon Smart Project Hero Image" loading="eager" decoding="async">
+            </picture>
             <!-- Scroll Down Indicator -->
             <div class="scroll-indicator">
                 <div class="scroll-arrow">
@@ -1354,6 +1357,13 @@
             <div class="section-content">
                 <p>The transformation from a device-first to scene-first approach significantly improved user engagement and satisfaction. The new interface made smart home automation more accessible to users of all technical backgrounds, creating a more intuitive and enjoyable home automation experience.</p>
                 <p>The design successfully bridged the gap between digital innovation and traditional home interaction patterns, making advanced technology feel familiar and approachable.</p>
+            </div>
+            
+            <!-- Results Image -->
+            <div class="single-column-gallery">
+                <div class="gallery-item-single fade-in-section">
+                    <img src="image/simon /result.png" alt="Simon Smart Results" style="width: 100%; height: auto; border-radius: var(--apple-radius-medium);">
+                </div>
             </div>
         </section>
     </main>
