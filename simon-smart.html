@@ -1117,7 +1117,11 @@
         <main class="main-content">
         <!-- Hero Image at Top -->
         <div class="hero-image fade-in-section">
-            <img src="image/Simonmainpagebanner.jpg" alt="Simon Smart Project Hero Image" loading="lazy">
+            <picture>
+                <source srcset="image/Simonmainpagebanner.avif" type="image/avif">
+                <source srcset="image/Simonmainpagebanner.webp" type="image/webp">
+                <img src="image/Simonmainpagebanner.jpg" alt="Simon Smart Project Hero Image" loading="eager">
+            </picture>
             <!-- Scroll Down Indicator -->
             <div class="scroll-indicator">
                 <div class="scroll-arrow">
